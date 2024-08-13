@@ -1,4 +1,4 @@
-package group.mytool.flutter.flex.backend.common.session.entity;
+package group.mytool.flutter.flex.backend.common.session.entity.po;
 
 import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Table;

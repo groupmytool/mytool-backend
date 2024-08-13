@@ -3,7 +3,8 @@ package group.mytool.flutter.flex.backend.food.material.service;
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import group.mytool.flutter.flex.backend.core.exception.BusinessException;
 import group.mytool.flutter.flex.backend.food.convertor.MaterialGroupConvertor;
-import group.mytool.flutter.flex.backend.food.material.entity.model.MaterialGroup;
+import group.mytool.flutter.flex.backend.food.material.entity.dto.MaterialGroupDto;
+import group.mytool.flutter.flex.backend.food.material.entity.po.MaterialGroup;
 import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialGroupVo;
 import group.mytool.flutter.flex.backend.food.material.mapper.MaterialGroupMapper;
 import org.springframework.stereotype.Service;
@@ -24,11 +25,11 @@ import static group.mytool.flutter.flex.backend.core.util.Constant.MATERIAL_GROU
 @Service
 public class MaterialGroupService extends ServiceImpl<MaterialGroupMapper, MaterialGroup> {
     public List<MaterialGroupVo> getMaterialGroupTree() {
-        List<MaterialGroupVo> rootList = new ArrayList<>();
+        List<MaterialGroupDto> rootList = new ArrayList<>();
         List<MaterialGroup> groupList = mapper.selectAll();
-        List<MaterialGroupVo> groupVoList = MaterialGroupConvertor.INSTANCE.doToVoList(groupList);
-        HashMap<String, MaterialGroupVo> tempMap = new HashMap<>();
-        for (MaterialGroupVo groupVo : groupVoList) {
+        List<MaterialGroupDto> groupVoList = MaterialGroupConvertor.INSTANCE.doToDtoList(groupList);
+        HashMap<String, MaterialGroupDto> tempMap = new HashMap<>();
+        for (MaterialGroupDto groupVo : groupVoList) {
             if (!Objects.equals(MATERIAL_GROUP_ROOT, groupVo.getParentId())) {
                 continue;
             }
@@ -38,18 +39,19 @@ public class MaterialGroupService extends ServiceImpl<MaterialGroupMapper, Mater
                 groupVo.setChildren(new ArrayList<>());
             }
         }
-        for (MaterialGroupVo groupVo : groupVoList) {
+        for (MaterialGroupDto groupVo : groupVoList) {
             if (Objects.equals(MATERIAL_GROUP_ROOT, groupVo.getParentId())) {
                 continue;
             }
-            MaterialGroupVo parent = tempMap.get(groupVo.getParentId());
+            MaterialGroupDto parent = tempMap.get(groupVo.getParentId());
             if (parent == null) {
                 throw BusinessException.build(MATERIAL_GROUP_DATA_ERROR);
             }
             parent.getChildren().add(groupVo);
         }
-        rootList.sort(Comparator.comparingInt(MaterialGroupVo::getSort));
-        return rootList;
+        List<MaterialGroupVo> materialGroupVos = MaterialGroupConvertor.INSTANCE.dtoToVoList(rootList);
+        materialGroupVos.sort(Comparator.comparingInt(MaterialGroupVo::getSort));
+        return materialGroupVos;
     }
 
 }

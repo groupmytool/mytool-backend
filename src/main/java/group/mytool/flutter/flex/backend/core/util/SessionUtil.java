@@ -1,6 +1,6 @@
 package group.mytool.flutter.flex.backend.core.util;
 
-import group.mytool.flutter.flex.backend.common.session.entity.SessionRecord;
+import group.mytool.flutter.flex.backend.common.session.entity.po.SessionRecord;
 import group.mytool.flutter.flex.backend.common.session.service.SessionRecordService;
 import group.mytool.flutter.flex.backend.core.exception.BaseRuntimeException;
 import group.mytool.flutter.flex.backend.core.exception.EnumGlobalError;

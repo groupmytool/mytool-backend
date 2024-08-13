@@ -1,7 +1,7 @@
 package group.mytool.flutter.flex.backend.food.material.mapper;
 
 import com.mybatisflex.core.BaseMapper;
-import group.mytool.flutter.flex.backend.food.material.entity.model.Material;
+import group.mytool.flutter.flex.backend.food.material.entity.po.Material;
 
 /**
  * @author adolphor <0haizhu0@gmail.com>

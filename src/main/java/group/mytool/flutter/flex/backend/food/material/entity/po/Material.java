@@ -1,4 +1,4 @@
-package group.mytool.flutter.flex.backend.food.material.entity.model;
+package group.mytool.flutter.flex.backend.food.material.entity.po;
 
 import com.mybatisflex.annotation.Column;
 import com.mybatisflex.annotation.Table;

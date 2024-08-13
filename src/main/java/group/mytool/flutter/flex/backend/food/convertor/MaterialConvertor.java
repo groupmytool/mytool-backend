@@ -1,6 +1,6 @@
 package group.mytool.flutter.flex.backend.food.convertor;
 
-import group.mytool.flutter.flex.backend.food.material.entity.model.Material;
+import group.mytool.flutter.flex.backend.food.material.entity.po.Material;
 import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
