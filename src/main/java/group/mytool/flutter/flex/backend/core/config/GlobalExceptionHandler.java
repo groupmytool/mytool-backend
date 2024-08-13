@@ -15,24 +15,24 @@ import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.S
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-  @ExceptionHandler(ParamException.class)
-  @ResponseStatus(HttpStatus.OK)
-  public Result baseRunTimeExceptionHandler(ParamException ex) {
-    return Result.error(ex.getCode(), ex.getMsg());
-  }
+    @ExceptionHandler(ParamException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Result baseRunTimeExceptionHandler(ParamException ex) {
+        return Result.error(ex.getCode(), ex.getMsg());
+    }
 
-  @ExceptionHandler(SystemException.class)
-  @ResponseStatus(HttpStatus.OK)
-  public Result baseRunTimeExceptionHandler(SystemException ex) {
-    log.error("Exception: ", ex);
-    return Result.error(ex.getCode(), ex.getMsg());
-  }
+    @ExceptionHandler(SystemException.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Result baseRunTimeExceptionHandler(SystemException ex) {
+        log.error("Exception: ", ex);
+        return Result.error(ex.getCode(), ex.getMsg());
+    }
 
-  @ExceptionHandler(Exception.class)
-  @ResponseStatus(HttpStatus.OK)
-  public Result exceptionHandler(Exception ex) {
-    log.error("Exception: ", ex);
-    return Result.error(SYSTEM_ERROR);
-  }
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.OK)
+    public Result exceptionHandler(Exception ex) {
+        log.error("Exception: ", ex);
+        return Result.error(SYSTEM_ERROR);
+    }
 
 }

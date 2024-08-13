@@ -1,9 +1,9 @@
 package group.mytool.flutter.flex.backend.core.util;
 
-import group.mytool.flutter.flex.backend.core.exception.EnumGlobalError;
-import group.mytool.flutter.flex.backend.global.session.entity.SessionRecord;
-import group.mytool.flutter.flex.backend.global.session.service.SessionRecordService;
+import group.mytool.flutter.flex.backend.common.session.entity.SessionRecord;
+import group.mytool.flutter.flex.backend.common.session.service.SessionRecordService;
 import group.mytool.flutter.flex.backend.core.exception.BaseRuntimeException;
+import group.mytool.flutter.flex.backend.core.exception.EnumGlobalError;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -17,57 +17,57 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Component
 public class SessionUtil {
 
-  private static SessionRecordService sessionRecordService;
+    private static SessionRecordService sessionRecordService;
 
-  public static String getToken() {
-    HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
-    String token = request.getParameter("token");
-    if (StringUtils.isNotEmpty(token)) {
-      return token;
-    }
-    token = request.getHeader("token");
-    if (StringUtils.isNotEmpty(token)) {
-      return token;
-    }
-    Cookie[] cookies = request.getCookies();
-    if (cookies != null && cookies.length > 0) {
-      for (Cookie cookie : cookies) {
-        if (StringUtils.equalsIgnoreCase(cookie.getName(), "token")) {
-          return cookie.getValue();
+    public static String getToken() {
+        HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
+        String token = request.getParameter("token");
+        if (StringUtils.isNotEmpty(token)) {
+            return token;
         }
-      }
+        token = request.getHeader("token");
+        if (StringUtils.isNotEmpty(token)) {
+            return token;
+        }
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null && cookies.length > 0) {
+            for (Cookie cookie : cookies) {
+                if (StringUtils.equalsIgnoreCase(cookie.getName(), "token")) {
+                    return cookie.getValue();
+                }
+            }
+        }
+        return null;
     }
-    return null;
-  }
 
-  public static String getUserId() {
-    String token = getToken();
-    SessionRecord record = sessionRecordService.getById(token);
-    if (record == null) {
-      throw new BaseRuntimeException(EnumGlobalError.AUTH_ILLEGAL_TOKEN);
+    public static String getUserId() {
+        String token = getToken();
+        SessionRecord record = sessionRecordService.getById(token);
+        if (record == null) {
+            throw new BaseRuntimeException(EnumGlobalError.AUTH_ILLEGAL_TOKEN);
+        }
+        String userId = record.getUserId();
+        if (StringUtils.isEmpty(userId)) {
+            throw new BaseRuntimeException(EnumGlobalError.AUTH_ILLEGAL_TOKEN);
+        }
+        return userId;
     }
-    String userId = record.getUserId();
-    if (StringUtils.isEmpty(userId)) {
-      throw new BaseRuntimeException(EnumGlobalError.AUTH_ILLEGAL_TOKEN);
-    }
-    return userId;
-  }
 
-  public static String getUserIdIfPresent() {
-    String token = getToken();
-    if (token == null) {
-      return null;
+    public static String getUserIdIfPresent() {
+        String token = getToken();
+        if (token == null) {
+            return null;
+        }
+        SessionRecord record = sessionRecordService.getById(token);
+        if (record == null) {
+            return null;
+        }
+        return record.getUserId();
     }
-    SessionRecord record = sessionRecordService.getById(token);
-    if (record == null) {
-      return null;
-    }
-    return record.getUserId();
-  }
 
-  @Autowired
-  private void setSessionRecordService(SessionRecordService sessionRecordService) {
-    SessionUtil.sessionRecordService = sessionRecordService;
-  }
+    @Autowired
+    private void setSessionRecordService(SessionRecordService sessionRecordService) {
+        SessionUtil.sessionRecordService = sessionRecordService;
+    }
 
 }

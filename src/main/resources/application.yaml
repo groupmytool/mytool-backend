@@ -4,11 +4,5 @@ server:
 spring:
   application:
     name: flutter-flex-backend
-  datasource:
-    url: jdbc:mysql://192.168.68.8:3306/mytool_group?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
-    username: mytool
-    password: mytool!@#123
-
-mytool:
-
-
+  profiles:
+    active: dev

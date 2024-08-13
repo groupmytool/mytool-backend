@@ -1,9 +1,11 @@
 package group.mytool.flutter.flex.backend.core.exception;
 
 public interface BaseEnumError {
-  String getCode();
 
-  String getMsg();
+    Integer getCode();
 
-  String getDetail();
+    String getMsg();
+
+    String getDetail();
+
 }

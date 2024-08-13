@@ -10,7 +10,7 @@ public class BaseRuntimeException extends RuntimeException {
     /**
      * 异常编码
      */
-    private String code;
+    private Integer code;
     /**
      * 异常提醒消息
      */
@@ -28,16 +28,19 @@ public class BaseRuntimeException extends RuntimeException {
         this(error.getCode(), error.getMsg(), error.getDetail(), cause);
     }
 
-    public BaseRuntimeException(String code, String msg) {
+    public BaseRuntimeException(Integer code, String msg) {
         this(code, msg, null, null);
     }
 
-    public BaseRuntimeException(String code, String msg, String detail, Throwable cause) {
+    public BaseRuntimeException(Integer code, String msg, String detail, Throwable cause) {
         super(msg, cause);
         this.code = code;
         this.msg = msg;
         this.detail = detail;
     }
 
+    public static BaseRuntimeException build(BaseEnumError error) {
+        return new BaseRuntimeException(error);
+    }
 
 }
