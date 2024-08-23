@@ -2,8 +2,8 @@ package group.mytool.flutter.flex.backend.core.util;
 
 import group.mytool.flutter.flex.backend.common.session.entity.po.SessionRecord;
 import group.mytool.flutter.flex.backend.common.session.service.SessionRecordService;
-import group.mytool.flutter.flex.backend.core.exception.BaseRuntimeException;
 import group.mytool.flutter.flex.backend.core.exception.EnumGlobalError;
+import group.mytool.flutter.flex.backend.core.exception.SystemException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -44,11 +44,11 @@ public class SessionUtil {
         String token = getToken();
         SessionRecord record = sessionRecordService.getById(token);
         if (record == null) {
-            throw new BaseRuntimeException(EnumGlobalError.AUTH_ILLEGAL_TOKEN);
+            throw SystemException.build(EnumGlobalError.AUTH_ILLEGAL_TOKEN);
         }
         String userId = record.getUserId();
         if (StringUtils.isEmpty(userId)) {
-            throw new BaseRuntimeException(EnumGlobalError.AUTH_ILLEGAL_TOKEN);
+            throw SystemException.build(EnumGlobalError.AUTH_ILLEGAL_TOKEN);
         }
         return userId;
     }

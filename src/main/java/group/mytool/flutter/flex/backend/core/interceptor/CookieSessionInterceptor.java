@@ -2,7 +2,7 @@ package group.mytool.flutter.flex.backend.core.interceptor;
 
 import group.mytool.flutter.flex.backend.common.session.entity.po.SessionRecord;
 import group.mytool.flutter.flex.backend.common.session.service.SessionRecordService;
-import group.mytool.flutter.flex.backend.core.exception.BaseRuntimeException;
+import group.mytool.flutter.flex.backend.core.exception.SystemException;
 import group.mytool.flutter.flex.backend.core.util.SessionUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,19 +29,19 @@ public class CookieSessionInterceptor implements HandlerInterceptor {
         // 开始校验token
         String token = SessionUtil.getToken();
         if (StringUtils.isEmpty(token)) {
-            throw new BaseRuntimeException(AUTH_ILLEGAL_TOKEN);
+            throw SystemException.build(AUTH_ILLEGAL_TOKEN);
         }
         // 不为空校验有效性
         SessionRecord session = sessionRecordService.getById(token);
         if (session == null) {
-            throw new BaseRuntimeException(AUTH_ILLEGAL_TOKEN);
+            throw SystemException.build(AUTH_ILLEGAL_TOKEN);
         }
         LocalDateTime freshTime = session.getFreshTime();
         long freshTimeLong = freshTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
         long curTimeLong = System.currentTimeMillis();
         // 会话过期时间：30分钟
         if ((curTimeLong - freshTimeLong) > session.getExpireTime() * 1000) {
-            throw new BaseRuntimeException(AUTH_ILLEGAL_TOKEN);
+            throw SystemException.build(AUTH_ILLEGAL_TOKEN);
         } else {
             // 更新刷新时间
             SessionRecord freshSession = new SessionRecord();

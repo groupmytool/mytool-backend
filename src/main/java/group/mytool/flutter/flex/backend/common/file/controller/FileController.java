@@ -1,7 +1,7 @@
 package group.mytool.flutter.flex.backend.common.file.controller;
 
 import group.mytool.flutter.flex.backend.common.file.entity.UploadFile;
-import group.mytool.flutter.flex.backend.core.exception.BaseRuntimeException;
+import group.mytool.flutter.flex.backend.core.exception.SystemException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +41,7 @@ public class FileController {
                 file[i].transferTo(dest);
                 names.add(FILE_PREFIX + imageRename);
             } catch (Exception e) {
-                throw new BaseRuntimeException(UPLOAD_FILE_ERROR);
+                throw SystemException.build(UPLOAD_FILE_ERROR);
             }
         }
         object.setFiles(names);

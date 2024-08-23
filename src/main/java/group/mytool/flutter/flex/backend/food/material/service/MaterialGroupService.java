@@ -1,7 +1,7 @@
 package group.mytool.flutter.flex.backend.food.material.service;
 
 import com.mybatisflex.spring.service.impl.ServiceImpl;
-import group.mytool.flutter.flex.backend.core.exception.BusinessException;
+import group.mytool.flutter.flex.backend.core.exception.SystemException;
 import group.mytool.flutter.flex.backend.food.convertor.MaterialGroupConvertor;
 import group.mytool.flutter.flex.backend.food.material.entity.dto.MaterialGroupDto;
 import group.mytool.flutter.flex.backend.food.material.entity.po.MaterialGroup;
@@ -51,7 +51,7 @@ public class MaterialGroupService extends ServiceImpl<MaterialGroupMapper, Mater
             }
             MaterialGroupDto parent = tempMap.get(groupVo.getParentId());
             if (parent == null) {
-                throw BusinessException.build(MATERIAL_GROUP_DATA_ERROR);
+                throw SystemException.build(MATERIAL_GROUP_DATA_ERROR);
             }
             parent.getChildren().add(groupVo);
         }
