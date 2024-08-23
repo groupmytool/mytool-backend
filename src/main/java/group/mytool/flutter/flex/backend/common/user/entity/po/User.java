@@ -30,6 +30,10 @@ public class User extends BaseEntity {
     @Column(value = "password")
     private String password;
 
+    @Schema(description = "密码盐")
+    @Column(value = "pswd_salt")
+    private String passwordSalt;
+
     @Schema(description = "邮箱")
     @Column(value = "email")
     private String email;
