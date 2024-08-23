@@ -1,6 +1,6 @@
 package group.mytool.flutter.flex.backend.food.material.controller;
 
-import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialGroupVo;
+import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialGroupTopVo;
 import group.mytool.flutter.flex.backend.food.material.service.MaterialGroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -21,9 +21,9 @@ public class MaterialGroupController {
 
     private final MaterialGroupService groupService;
 
-    @PostMapping("/tree")
-    public List<MaterialGroupVo> getMaterialGroupTree() {
-        return groupService.getMaterialGroupTree();
+    @PostMapping("/top/tree")
+    public List<MaterialGroupTopVo> getMaterialGroupTopTree() {
+        return groupService.getMaterialGroupTopTree();
     }
 
 

@@ -9,7 +9,10 @@ import java.util.List;
  * @author adolphor <0haizhu0@gmail.com>
  */
 @Data
-public class MaterialGroupVo {
+public class MaterialGroupTopVo {
+
+    @Schema(description = "ID")
+    private String id;
 
     @Schema(description = "名称")
     private String name;
@@ -18,9 +21,6 @@ public class MaterialGroupVo {
     private Integer sort;
 
     @Schema(description = "子节点")
-    private List<MaterialGroupVo> children;
-
-    @Schema(description = "食材列表")
-    private List<MaterialVo> materials;
+    private List<MaterialGroupTopVo> children;
 
 }

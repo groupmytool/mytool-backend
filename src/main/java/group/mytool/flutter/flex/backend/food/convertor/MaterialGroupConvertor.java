@@ -2,7 +2,8 @@ package group.mytool.flutter.flex.backend.food.convertor;
 
 import group.mytool.flutter.flex.backend.food.material.entity.dto.MaterialGroupDto;
 import group.mytool.flutter.flex.backend.food.material.entity.po.MaterialGroup;
-import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialGroupVo;
+import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialGroupChildVo;
+import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialGroupTopVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -18,10 +19,14 @@ public interface MaterialGroupConvertor {
 
     MaterialGroupDto doToDto(MaterialGroup materialGroup);
 
-    MaterialGroupVo dtoToVo(MaterialGroupDto materialGroup);
-
     List<MaterialGroupDto> doToDtoList(List<MaterialGroup> materialGroups);
 
-    List<MaterialGroupVo> dtoToVoList(List<MaterialGroupDto> materialGroups);
+    MaterialGroupChildVo dtoToChildVo(MaterialGroupDto materialGroup);
+
+    List<MaterialGroupChildVo> dtoToChildVoList(List<MaterialGroupDto> materialGroups);
+
+    MaterialGroupTopVo dtoToTopVo(MaterialGroupDto materialGroup);
+
+    List<MaterialGroupTopVo> dtoToTopVoList(List<MaterialGroupDto> materialGroups);
 
 }

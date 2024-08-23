@@ -5,7 +5,7 @@ import group.mytool.flutter.flex.backend.core.exception.BusinessException;
 import group.mytool.flutter.flex.backend.food.convertor.MaterialGroupConvertor;
 import group.mytool.flutter.flex.backend.food.material.entity.dto.MaterialGroupDto;
 import group.mytool.flutter.flex.backend.food.material.entity.po.MaterialGroup;
-import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialGroupVo;
+import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialGroupTopVo;
 import group.mytool.flutter.flex.backend.food.material.mapper.MaterialGroupMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -24,7 +24,13 @@ import static group.mytool.flutter.flex.backend.core.util.Constant.MATERIAL_GROU
  */
 @Service
 public class MaterialGroupService extends ServiceImpl<MaterialGroupMapper, MaterialGroup> {
-    public List<MaterialGroupVo> getMaterialGroupTree() {
+
+    /**
+     * 获取顶层食材分组树
+     *
+     * @return
+     */
+    public List<MaterialGroupTopVo> getMaterialGroupTopTree() {
         List<MaterialGroupDto> rootList = new ArrayList<>();
         List<MaterialGroup> groupList = mapper.selectAll();
         List<MaterialGroupDto> groupVoList = MaterialGroupConvertor.INSTANCE.doToDtoList(groupList);
@@ -49,9 +55,9 @@ public class MaterialGroupService extends ServiceImpl<MaterialGroupMapper, Mater
             }
             parent.getChildren().add(groupVo);
         }
-        List<MaterialGroupVo> materialGroupVos = MaterialGroupConvertor.INSTANCE.dtoToVoList(rootList);
-        materialGroupVos.sort(Comparator.comparingInt(MaterialGroupVo::getSort));
-        return materialGroupVos;
+        List<MaterialGroupTopVo> materialGroupTopVos = MaterialGroupConvertor.INSTANCE.dtoToTopVoList(rootList);
+        materialGroupTopVos.sort(Comparator.comparingInt(MaterialGroupTopVo::getSort));
+        return materialGroupTopVos;
     }
 
 }
