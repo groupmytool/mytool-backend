@@ -1,6 +1,5 @@
 package group.mytool.flutter.flex.backend.common.user.service;
 
-import cn.hutool.core.util.IdUtil;
 import com.mybatisflex.core.logicdelete.LogicDeleteManager;
 import com.mybatisflex.core.query.QueryWrapper;
 import group.mytool.flutter.flex.backend.FlutterFlexBackendApplicationTests;
@@ -20,6 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import static group.mytool.flutter.flex.backend.common.user.controller.MemberControllerTest.CLIENT_ID;
+import static group.mytool.flutter.flex.backend.common.user.controller.MemberControllerTest.PASSWORD;
+import static group.mytool.flutter.flex.backend.common.user.controller.MemberControllerTest.USERNAME;
+
 /**
  * @author adolphor <0haizhu0@gmail.com>
  */
@@ -33,8 +36,8 @@ class UserServiceTest extends FlutterFlexBackendApplicationTests {
   @Test
   void register() {
     RegisterParam registerParam = new RegisterParam();
-    registerParam.setUsername("test");
-    registerParam.setPassword("Test@123");
+    registerParam.setUsername(USERNAME);
+    registerParam.setPassword(PASSWORD);
 
     QueryWrapper queryWrapper = userService.query()
         .eq(User::getUsername, registerParam.getUsername());
@@ -54,9 +57,9 @@ class UserServiceTest extends FlutterFlexBackendApplicationTests {
   @Test
   void login() {
     LoginParam loginParam = new LoginParam();
-    loginParam.setUsername("test");
-    loginParam.setPassword("Test@123");
-    loginParam.setClientId(IdUtil.simpleUUID());
+    loginParam.setUsername(USERNAME);
+    loginParam.setPassword(PASSWORD);
+    loginParam.setClientId(CLIENT_ID);
     LoginTokenVo loginToken = userService.login(loginParam);
     log.debug("loginToken: {}", loginToken);
     Assertions.assertTrue(Objects.nonNull(loginToken));

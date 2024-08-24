@@ -17,7 +17,7 @@ import java.util.Set;
  * @author adolphor <0haizhu0@gmail.com>
  */
 @SpringBootTest
-class MemberControllerTest extends BaseValidateTest {
+public class MemberControllerTest extends BaseValidateTest {
 
   public static final String USERNAME = "mytool";
   public static final String PASSWORD = "MyTool@123";
