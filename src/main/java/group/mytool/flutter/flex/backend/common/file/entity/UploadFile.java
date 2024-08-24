@@ -11,7 +11,7 @@ import java.util.ArrayList;
 @Data
 public class UploadFile {
 
-    @Schema(description = "文件名")
-    private ArrayList<String> files;
+  @Schema(description = "文件名")
+  private ArrayList<String> files;
 
 }

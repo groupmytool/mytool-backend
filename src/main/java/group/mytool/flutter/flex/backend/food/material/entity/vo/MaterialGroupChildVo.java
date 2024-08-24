@@ -11,16 +11,16 @@ import java.util.List;
 @Data
 public class MaterialGroupChildVo {
 
-    @Schema(description = "ID")
-    private String id;
+  @Schema(description = "ID")
+  private String id;
 
-    @Schema(description = "名称")
-    private String name;
+  @Schema(description = "名称")
+  private String name;
 
-    @Schema(description = "排序")
-    private Integer sort;
+  @Schema(description = "排序")
+  private Integer sort;
 
-    @Schema(description = "食材列表")
-    private List<MaterialVo> materials;
+  @Schema(description = "食材列表")
+  private List<MaterialVo> materials;
 
 }

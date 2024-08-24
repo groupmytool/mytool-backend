@@ -19,12 +19,12 @@ import java.util.List;
 @RequestMapping("/materialGroup")
 public class MaterialGroupController {
 
-    private final MaterialGroupService groupService;
+  private final MaterialGroupService groupService;
 
-    @PostMapping("/top/tree")
-    public List<MaterialGroupTopVo> getMaterialGroupTopTree() {
-        return groupService.getMaterialGroupTopTree();
-    }
+  @PostMapping("/top/tree")
+  public List<MaterialGroupTopVo> getMaterialGroupTopTree() {
+    return groupService.getMaterialGroupTopTree();
+  }
 
 
 }

@@ -14,15 +14,15 @@ import java.time.LocalDate;
 @Data
 public class BaseEntity {
 
-    @Id(value = KeyGenerators.uuid, keyType = KeyType.Generator)
-    private String id;
-    @Column(value = "was_del", isLogicDelete = true)
-    private Integer wasDel;
-    @Column(value = "cnt_create")
-    private LocalDate cntCreate;
-    @Column(value = "cnt_modified")
-    private LocalDate cntModified;
-    @Column(value = "operate_info", isLarge = true)
-    private String operateInfo;
+  @Id(value = KeyGenerators.uuid, keyType = KeyType.Generator)
+  private String id;
+  @Column(value = "was_del", isLogicDelete = true)
+  private Integer wasDel;
+  @Column(value = "cnt_create")
+  private LocalDate cntCreate;
+  @Column(value = "cnt_modified")
+  private LocalDate cntModified;
+  @Column(value = "operate_info", isLarge = true)
+  private String operateInfo;
 
 }

@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class FlutterFlexBackendApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(FlutterFlexBackendApplication.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(FlutterFlexBackendApplication.class, args);
+  }
 
 }

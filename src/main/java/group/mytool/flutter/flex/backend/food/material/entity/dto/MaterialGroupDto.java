@@ -13,10 +13,10 @@ import java.util.List;
 @Data
 public class MaterialGroupDto extends MaterialGroup {
 
-    @Schema(description = "子节点")
-    private List<MaterialGroupDto> children;
+  @Schema(description = "子节点")
+  private List<MaterialGroupDto> children;
 
-    @Schema(description = "食材列表")
-    private List<MaterialVo> materials;
+  @Schema(description = "食材列表")
+  private List<MaterialVo> materials;
 
 }

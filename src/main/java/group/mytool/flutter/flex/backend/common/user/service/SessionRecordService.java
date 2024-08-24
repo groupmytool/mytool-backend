@@ -1,8 +1,8 @@
-package group.mytool.flutter.flex.backend.common.session.service;
+package group.mytool.flutter.flex.backend.common.user.service;
 
 import com.mybatisflex.spring.service.impl.ServiceImpl;
-import group.mytool.flutter.flex.backend.common.session.entity.po.SessionRecord;
-import group.mytool.flutter.flex.backend.common.session.mapper.SessionRecordMapper;
+import group.mytool.flutter.flex.backend.common.user.entity.po.SessionRecord;
+import group.mytool.flutter.flex.backend.common.user.mapper.SessionRecordMapper;
 import org.springframework.stereotype.Service;
 
 /**

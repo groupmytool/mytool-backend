@@ -1,4 +1,4 @@
-package group.mytool.flutter.flex.backend.food.convertor;
+package group.mytool.flutter.flex.backend.food.material.entity.convertor;
 
 import group.mytool.flutter.flex.backend.food.material.entity.po.Material;
 import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialVo;

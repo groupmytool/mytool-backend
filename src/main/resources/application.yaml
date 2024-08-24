@@ -6,3 +6,7 @@ spring:
     name: flutter-flex-backend
   profiles:
     active: dev
+
+logging:
+  file:
+    path: logs

@@ -1,7 +1,7 @@
 package group.mytool.flutter.flex.backend.core.interceptor;
 
-import group.mytool.flutter.flex.backend.common.session.entity.po.SessionRecord;
-import group.mytool.flutter.flex.backend.common.session.service.SessionRecordService;
+import group.mytool.flutter.flex.backend.common.user.entity.po.SessionRecord;
+import group.mytool.flutter.flex.backend.common.user.service.SessionRecordService;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
 import group.mytool.flutter.flex.backend.core.util.SessionUtil;
 import jakarta.servlet.http.HttpServletRequest;

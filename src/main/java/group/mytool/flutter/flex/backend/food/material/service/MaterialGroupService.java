@@ -2,7 +2,7 @@ package group.mytool.flutter.flex.backend.food.material.service;
 
 import com.mybatisflex.spring.service.impl.ServiceImpl;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
-import group.mytool.flutter.flex.backend.food.convertor.MaterialGroupConvertor;
+import group.mytool.flutter.flex.backend.food.material.entity.convertor.MaterialGroupConvertor;
 import group.mytool.flutter.flex.backend.food.material.entity.dto.MaterialGroupDto;
 import group.mytool.flutter.flex.backend.food.material.entity.po.MaterialGroup;
 import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialGroupTopVo;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.MATERIAL_GROUP_DATA_ERROR;
-import static group.mytool.flutter.flex.backend.core.util.Constant.MATERIAL_GROUP_ROOT;
+import static group.mytool.flutter.flex.backend.core.util.Constant.NODE_ROOT;
 
 /**
  * @author adolphor <0haizhu0@gmail.com>
@@ -36,7 +36,7 @@ public class MaterialGroupService extends ServiceImpl<MaterialGroupMapper, Mater
         List<MaterialGroupDto> groupVoList = MaterialGroupConvertor.INSTANCE.doToDtoList(groupList);
         HashMap<String, MaterialGroupDto> tempMap = new HashMap<>();
         for (MaterialGroupDto groupVo : groupVoList) {
-            if (!Objects.equals(MATERIAL_GROUP_ROOT, groupVo.getParentId())) {
+            if (!Objects.equals(NODE_ROOT, groupVo.getParentId())) {
                 continue;
             }
             rootList.add(groupVo);
@@ -46,7 +46,7 @@ public class MaterialGroupService extends ServiceImpl<MaterialGroupMapper, Mater
             }
         }
         for (MaterialGroupDto groupVo : groupVoList) {
-            if (Objects.equals(MATERIAL_GROUP_ROOT, groupVo.getParentId())) {
+            if (Objects.equals(NODE_ROOT, groupVo.getParentId())) {
                 continue;
             }
             MaterialGroupDto parent = tempMap.get(groupVo.getParentId());

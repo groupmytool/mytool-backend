@@ -14,17 +14,17 @@ import lombok.Data;
 @Table("food_material_group")
 public class MaterialGroup extends BaseEntity {
 
-    @Schema(description = "父节点ID")
-    @Column(value = "parent_id")
-    private String parentId;
+  @Schema(description = "父节点ID")
+  @Column(value = "parent_id")
+  private String parentId;
 
-    @Schema(description = "名称")
-    @Column(value = "group_name")
-    private String name;
+  @Schema(description = "名称")
+  @Column(value = "group_name")
+  private String name;
 
-    @Schema(description = "排序")
-    @Column(value = "group_sort")
-    private Integer sort;
+  @Schema(description = "排序")
+  @Column(value = "group_sort")
+  private Integer sort;
 
 
 }

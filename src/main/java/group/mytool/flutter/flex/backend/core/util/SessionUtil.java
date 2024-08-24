@@ -1,7 +1,7 @@
 package group.mytool.flutter.flex.backend.core.util;
 
-import group.mytool.flutter.flex.backend.common.session.entity.po.SessionRecord;
-import group.mytool.flutter.flex.backend.common.session.service.SessionRecordService;
+import group.mytool.flutter.flex.backend.common.user.entity.po.SessionRecord;
+import group.mytool.flutter.flex.backend.common.user.service.SessionRecordService;
 import group.mytool.flutter.flex.backend.core.exception.EnumGlobalError;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
 import jakarta.servlet.http.Cookie;
@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import static group.mytool.flutter.flex.backend.core.util.Constant.TOKEN;
+
 @Slf4j
 @Component
 public class SessionUtil {
@@ -21,18 +23,18 @@ public class SessionUtil {
 
     public static String getToken() {
         HttpServletRequest request = ((ServletRequestAttributes) (RequestContextHolder.currentRequestAttributes())).getRequest();
-        String token = request.getParameter("token");
+        String token = request.getParameter(TOKEN);
         if (StringUtils.isNotEmpty(token)) {
             return token;
         }
-        token = request.getHeader("token");
+        token = request.getHeader(TOKEN);
         if (StringUtils.isNotEmpty(token)) {
             return token;
         }
         Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies) {
-                if (StringUtils.equalsIgnoreCase(cookie.getName(), "token")) {
+                if (StringUtils.equalsIgnoreCase(cookie.getName(), TOKEN)) {
                     return cookie.getValue();
                 }
             }

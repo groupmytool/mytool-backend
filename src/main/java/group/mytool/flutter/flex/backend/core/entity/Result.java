@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Collections;
+import java.util.Map;
 
 import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.SUCCESS;
 
@@ -21,7 +22,7 @@ public class Result<T> {
 
     public Result(EnumGlobalError error) {
         this.code = error.getCode();
-        this.message = error.getMsg();
+        this.message = error.getMessage();
     }
 
     public static <T> Result ok(T data) {
@@ -30,11 +31,11 @@ public class Result<T> {
         return restRes;
     }
 
-    public static Result<Boolean> error(EnumGlobalError error) {
-        return Result.error(error.getCode(), error.getMsg());
+    public static Result<Map<String, String>> error(EnumGlobalError error) {
+        return Result.error(error.getCode(), error.getMessage());
     }
 
-    public static Result<Boolean> error(Integer code, String message) {
+    public static Result<Map<String, String>> error(Integer code, String message) {
         Result restRes = new Result();
         restRes.setCode(code);
         restRes.setMessage(message);
