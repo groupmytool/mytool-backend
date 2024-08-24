@@ -13,10 +13,10 @@ import java.util.List;
 @Mapper
 public interface MaterialConvertor {
 
-    MaterialConvertor INSTANCE = Mappers.getMapper(MaterialConvertor.class);
+  MaterialConvertor INSTANCE = Mappers.getMapper(MaterialConvertor.class);
 
-    MaterialVo doToVo(Material material);
+  MaterialVo doToVo(Material material);
 
-    List<MaterialVo> doToVoList(List<Material> material);
+  List<MaterialVo> doToVoList(List<Material> material);
 
 }

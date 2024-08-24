@@ -13,38 +13,38 @@ import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.S
 @Setter
 public class Result<T> {
 
-    private String message;
-    private T data;
-    private Integer code;
+  private String message;
+  private T data;
+  private Integer code;
 
-    public Result() {
-    }
+  public Result() {
+  }
 
-    public Result(EnumGlobalError error) {
-        this.code = error.getCode();
-        this.message = error.getMessage();
-    }
+  public Result(EnumGlobalError error) {
+    this.code = error.getCode();
+    this.message = error.getMessage();
+  }
 
-    public static <T> Result ok(T data) {
-        Result restRes = new Result(SUCCESS);
-        restRes.setData(data);
-        return restRes;
-    }
+  public static <T> Result ok(T data) {
+    Result restRes = new Result(SUCCESS);
+    restRes.setData(data);
+    return restRes;
+  }
 
-    public static Result<Map<String, String>> error(EnumGlobalError error) {
-        return Result.error(error.getCode(), error.getMessage());
-    }
+  public static Result<Map<String, String>> error(EnumGlobalError error) {
+    return Result.error(error.getCode(), error.getMessage());
+  }
 
-    public static Result<Map<String, String>> error(Integer code, String message) {
-        Result restRes = new Result();
-        restRes.setCode(code);
-        restRes.setMessage(message);
-        restRes.setData(Collections.emptyMap());
-        return restRes;
-    }
+  public static Result<Map<String, String>> error(Integer code, String message) {
+    Result restRes = new Result();
+    restRes.setCode(code);
+    restRes.setMessage(message);
+    restRes.setData(Collections.emptyMap());
+    return restRes;
+  }
 
-    public Boolean canSuccess() {
-        return SUCCESS.getCode() == this.getCode();
-    }
+  public Boolean canSuccess() {
+    return SUCCESS.getCode() == this.getCode();
+  }
 
 }

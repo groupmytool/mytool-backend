@@ -12,11 +12,11 @@ public class User extends BaseEntity {
 
   @Schema(description = "用户名")
   @Column(value = "user_name")
-  private String userName;
+  private String username;
 
   @Schema(description = "昵称")
   @Column(value = "nike_name")
-  private String nickName;
+  private String nickname;
 
   @Schema(description = "简介")
   @Column(value = "bio")

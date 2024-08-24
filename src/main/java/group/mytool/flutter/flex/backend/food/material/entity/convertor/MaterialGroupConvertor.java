@@ -15,18 +15,18 @@ import java.util.List;
 @Mapper
 public interface MaterialGroupConvertor {
 
-    MaterialGroupConvertor INSTANCE = Mappers.getMapper(MaterialGroupConvertor.class);
+  MaterialGroupConvertor INSTANCE = Mappers.getMapper(MaterialGroupConvertor.class);
 
-    MaterialGroupDto doToDto(MaterialGroup materialGroup);
+  MaterialGroupDto doToDto(MaterialGroup materialGroup);
 
-    List<MaterialGroupDto> doToDtoList(List<MaterialGroup> materialGroups);
+  List<MaterialGroupDto> doToDtoList(List<MaterialGroup> materialGroups);
 
-    MaterialGroupChildVo dtoToChildVo(MaterialGroupDto materialGroup);
+  MaterialGroupChildVo dtoToChildVo(MaterialGroupDto materialGroup);
 
-    List<MaterialGroupChildVo> dtoToChildVoList(List<MaterialGroupDto> materialGroups);
+  List<MaterialGroupChildVo> dtoToChildVoList(List<MaterialGroupDto> materialGroups);
 
-    MaterialGroupTopVo dtoToTopVo(MaterialGroupDto materialGroup);
+  MaterialGroupTopVo dtoToTopVo(MaterialGroupDto materialGroup);
 
-    List<MaterialGroupTopVo> dtoToTopVoList(List<MaterialGroupDto> materialGroups);
+  List<MaterialGroupTopVo> dtoToTopVoList(List<MaterialGroupDto> materialGroups);
 
 }

@@ -25,39 +25,39 @@ import static group.mytool.flutter.flex.backend.core.util.Constant.NODE_ROOT;
 @Service
 public class MaterialGroupService extends ServiceImpl<MaterialGroupMapper, MaterialGroup> {
 
-    /**
-     * 获取顶层食材分组树
-     *
-     * @return
-     */
-    public List<MaterialGroupTopVo> getMaterialGroupTopTree() {
-        List<MaterialGroupDto> rootList = new ArrayList<>();
-        List<MaterialGroup> groupList = mapper.selectAll();
-        List<MaterialGroupDto> groupVoList = MaterialGroupConvertor.INSTANCE.doToDtoList(groupList);
-        HashMap<String, MaterialGroupDto> tempMap = new HashMap<>();
-        for (MaterialGroupDto groupVo : groupVoList) {
-            if (!Objects.equals(NODE_ROOT, groupVo.getParentId())) {
-                continue;
-            }
-            rootList.add(groupVo);
-            tempMap.put(groupVo.getId(), groupVo);
-            if (CollectionUtils.isEmpty(groupVo.getChildren())) {
-                groupVo.setChildren(new ArrayList<>());
-            }
-        }
-        for (MaterialGroupDto groupVo : groupVoList) {
-            if (Objects.equals(NODE_ROOT, groupVo.getParentId())) {
-                continue;
-            }
-            MaterialGroupDto parent = tempMap.get(groupVo.getParentId());
-            if (parent == null) {
-                throw SystemException.build(MATERIAL_GROUP_DATA_ERROR);
-            }
-            parent.getChildren().add(groupVo);
-        }
-        List<MaterialGroupTopVo> materialGroupTopVos = MaterialGroupConvertor.INSTANCE.dtoToTopVoList(rootList);
-        materialGroupTopVos.sort(Comparator.comparingInt(MaterialGroupTopVo::getSort));
-        return materialGroupTopVos;
+  /**
+   * 获取顶层食材分组树
+   *
+   * @return
+   */
+  public List<MaterialGroupTopVo> getMaterialGroupTopTree() {
+    List<MaterialGroupDto> rootList = new ArrayList<>();
+    List<MaterialGroup> groupList = mapper.selectAll();
+    List<MaterialGroupDto> groupVoList = MaterialGroupConvertor.INSTANCE.doToDtoList(groupList);
+    HashMap<String, MaterialGroupDto> tempMap = new HashMap<>();
+    for (MaterialGroupDto groupVo : groupVoList) {
+      if (!Objects.equals(NODE_ROOT, groupVo.getParentId())) {
+        continue;
+      }
+      rootList.add(groupVo);
+      tempMap.put(groupVo.getId(), groupVo);
+      if (CollectionUtils.isEmpty(groupVo.getChildren())) {
+        groupVo.setChildren(new ArrayList<>());
+      }
     }
+    for (MaterialGroupDto groupVo : groupVoList) {
+      if (Objects.equals(NODE_ROOT, groupVo.getParentId())) {
+        continue;
+      }
+      MaterialGroupDto parent = tempMap.get(groupVo.getParentId());
+      if (parent == null) {
+        throw SystemException.build(MATERIAL_GROUP_DATA_ERROR);
+      }
+      parent.getChildren().add(groupVo);
+    }
+    List<MaterialGroupTopVo> materialGroupTopVos = MaterialGroupConvertor.INSTANCE.dtoToTopVoList(rootList);
+    materialGroupTopVos.sort(Comparator.comparingInt(MaterialGroupTopVo::getSort));
+    return materialGroupTopVos;
+  }
 
 }

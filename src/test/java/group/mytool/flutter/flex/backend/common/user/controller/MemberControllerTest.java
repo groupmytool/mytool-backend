@@ -1,6 +1,8 @@
 package group.mytool.flutter.flex.backend.common.user.controller;
 
+import cn.hutool.core.util.IdUtil;
 import group.mytool.flutter.flex.backend.common.BaseValidateTest;
+import group.mytool.flutter.flex.backend.common.user.entity.req.LoginParam;
 import group.mytool.flutter.flex.backend.common.user.entity.req.RegisterParam;
 import group.mytool.flutter.flex.backend.core.util.validator.ValidPassword;
 import group.mytool.flutter.flex.backend.core.util.validator.ValidUsername;
@@ -19,6 +21,7 @@ class MemberControllerTest extends BaseValidateTest {
 
   public static final String USERNAME = "mytool";
   public static final String PASSWORD = "MyTool@123";
+  public static final String CLIENT_ID = IdUtil.simpleUUID();
 
   @Test
   void validateRegisterParam() {
@@ -27,23 +30,23 @@ class MemberControllerTest extends BaseValidateTest {
     registerParam.setPassword(PASSWORD);
     // - username is null
     String message = this.validateMessage(registerParam);
-    Assertions.assertTrue(message.contains(RegisterParam.userNameNotNullMessage));
+    Assertions.assertTrue(message.contains(RegisterParam.usernameNotNullMessage));
     Assertions.assertTrue(message.contains(ValidUsername.defaultMessage));
     // - username too short
-    registerParam.setUserName("ts");
+    registerParam.setUsername("ts");
     message = this.validateMessage(registerParam);
-    Assertions.assertTrue(message.contains(RegisterParam.userNameSizeMessage));
+    Assertions.assertTrue(message.contains(RegisterParam.usernameSizeMessage));
     // - username not match pattern: not start with number
-    registerParam.setUserName("123test");
+    registerParam.setUsername("123test");
     message = this.validateMessage(registerParam);
     Assertions.assertTrue(message.contains(ValidUsername.defaultMessage));
     // - username not match pattern: not start with upper case character
-    registerParam.setUserName("Test123");
+    registerParam.setUsername("Test123");
     message = this.validateMessage(registerParam);
     Assertions.assertTrue(message.contains(ValidUsername.defaultMessage));
 
     // validate username
-    registerParam.setUserName(USERNAME);
+    registerParam.setUsername(USERNAME);
     registerParam.setPassword(null);
     // - password is null
     message = this.validateMessage(registerParam);
@@ -71,10 +74,21 @@ class MemberControllerTest extends BaseValidateTest {
     Assertions.assertTrue(violations.isEmpty());
 
     // validate success
-    registerParam.setUserName(USERNAME);
+    registerParam.setUsername(USERNAME);
     registerParam.setPassword(PASSWORD);
     violations = this.validate(registerParam);
     Assertions.assertTrue(violations.isEmpty());
 
   }
+
+  @Test
+  void validateLoginParam() {
+    LoginParam loginParam = new LoginParam();
+    String message = this.validateMessage(loginParam);
+    Assertions.assertTrue(message.contains(LoginParam.clientIdNotNullMessage));
+    Assertions.assertTrue(message.contains(LoginParam.usernameNotNullMessage));
+    Assertions.assertTrue(message.contains(LoginParam.passwordNotNullMessage));
+  }
+
+
 }

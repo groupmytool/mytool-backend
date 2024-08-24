@@ -1,6 +1,8 @@
 package group.mytool.flutter.flex.backend.common.user.controller;
 
+import group.mytool.flutter.flex.backend.common.user.entity.req.LoginParam;
 import group.mytool.flutter.flex.backend.common.user.entity.req.RegisterParam;
+import group.mytool.flutter.flex.backend.common.user.entity.vo.LoginTokenVo;
 import group.mytool.flutter.flex.backend.common.user.service.UserService;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
 import lombok.RequiredArgsConstructor;
@@ -31,10 +33,15 @@ public class MemberController {
   @PostMapping("/register")
   public boolean register(@RequestBody @Validated RegisterParam registerParam) {
     // 不允许注册保留账号
-    if (USER_OBTAIN.contains(registerParam.getUserName())) {
+    if (USER_OBTAIN.contains(registerParam.getUsername())) {
       throw SystemException.build(USER_NAME_OBTAIN);
     }
     return userService.register(registerParam);
+  }
+
+  @PostMapping("/login")
+  public LoginTokenVo login(@RequestBody @Validated LoginParam loginParam) {
+    return userService.login(loginParam);
   }
 
 }

@@ -20,32 +20,32 @@ import static group.mytool.flutter.flex.backend.core.util.Constant.FILE_PREFIX;
 @RequestMapping("/file")
 public class FileController {
 
-    @Value("${mytool.upload.path}")
-    private String uploadFilePath;
+  @Value("${mytool.upload.path}")
+  private String uploadFilePath;
 
-    @RequestMapping("/upload")
-    public UploadFile httpUpload(@RequestParam("file") MultipartFile file[]) {
-        UploadFile object = new UploadFile();
-        ArrayList<String> names = new ArrayList<>();
-        for (int i = 0; i < file.length; i++) {
-            String imageName = file[i].getOriginalFilename();
-            String[] split = imageName.split("\\.");
-            String type = split[split.length - 1];
-            String imageRename = System.currentTimeMillis() + "." + type;
-            String filePath = uploadFilePath + '/' + imageRename;
-            File dest = new File(filePath);
-            if (!dest.getParentFile().exists()) {
-                dest.getParentFile().mkdirs();
-            }
-            try {
-                file[i].transferTo(dest);
-                names.add(FILE_PREFIX + imageRename);
-            } catch (Exception e) {
-                throw SystemException.build(UPLOAD_FILE_ERROR);
-            }
-        }
-        object.setFiles(names);
-        return object;
+  @RequestMapping("/upload")
+  public UploadFile httpUpload(@RequestParam("file") MultipartFile file[]) {
+    UploadFile object = new UploadFile();
+    ArrayList<String> names = new ArrayList<>();
+    for (int i = 0; i < file.length; i++) {
+      String imageName = file[i].getOriginalFilename();
+      String[] split = imageName.split("\\.");
+      String type = split[split.length - 1];
+      String imageRename = System.currentTimeMillis() + "." + type;
+      String filePath = uploadFilePath + '/' + imageRename;
+      File dest = new File(filePath);
+      if (!dest.getParentFile().exists()) {
+        dest.getParentFile().mkdirs();
+      }
+      try {
+        file[i].transferTo(dest);
+        names.add(FILE_PREFIX + imageRename);
+      } catch (Exception e) {
+        throw SystemException.build(UPLOAD_FILE_ERROR);
+      }
     }
+    object.setFiles(names);
+    return object;
+  }
 
 }
