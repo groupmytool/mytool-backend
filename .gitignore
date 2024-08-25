@@ -35,4 +35,7 @@ build/
 ### log ###
 *.log
 
+.DS_Stor
+
 application-dev.yaml
+bellsoft-liberica-vm-full-openjdk22.0.2+11-24.0.2+1-linux-amd64.tar.gz

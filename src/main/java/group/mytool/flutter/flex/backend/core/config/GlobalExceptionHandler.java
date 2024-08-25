@@ -1,8 +1,9 @@
 package group.mytool.flutter.flex.backend.core.config;
 
+import cn.hutool.log.Log;
+import cn.hutool.log.LogFactory;
 import group.mytool.flutter.flex.backend.core.entity.Result;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -17,14 +18,15 @@ import java.util.Objects;
 import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.PARAM_ILLEGAL;
 import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.SYSTEM_ERROR;
 
-@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+  private static final Log logger = LogFactory.get();
+  
   @ExceptionHandler(SystemException.class)
   @ResponseStatus(HttpStatus.OK)
   public Result<Map<String, String>> baseRunTimeExceptionHandler(SystemException ex) {
-    log.warn("SystemException: ", ex);
+    logger.warn("SystemException: ", ex);
     return Result.error(ex.getCode(), ex.getMessage());
   }
 
@@ -40,14 +42,14 @@ public class GlobalExceptionHandler {
       return Result.error(PARAM_ILLEGAL);
     }
     String message = fieldError.getDefaultMessage();
-    log.debug("MethodArgumentNotValidException: ", ex);
+    logger.debug("MethodArgumentNotValidException: ", ex);
     return Result.error(PARAM_ILLEGAL.getCode(), message);
   }
 
   @ExceptionHandler(Exception.class)
   @ResponseStatus(HttpStatus.OK)
   public Result<Map<String, String>> exceptionHandler(Exception ex) {
-    log.error("Exception: ", ex);
+    logger.error("Exception: ", ex);
     return Result.error(SYSTEM_ERROR);
   }
 

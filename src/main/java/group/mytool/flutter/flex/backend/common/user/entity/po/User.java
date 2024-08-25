@@ -1,41 +1,45 @@
 package group.mytool.flutter.flex.backend.common.user.entity.po;
 
-import com.mybatisflex.annotation.Column;
-import com.mybatisflex.annotation.Table;
 import group.mytool.flutter.flex.backend.core.entity.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
-@Table("common_user")
+@Table(name = "common_user")
 public class User extends BaseEntity {
 
   @Schema(description = "用户名")
-  @Column(value = "user_name")
+  @Column(name = "username")
   private String username;
 
   @Schema(description = "昵称")
-  @Column(value = "nike_name")
+  @Column(name = "nikename")
   private String nickname;
 
+  @Schema(description = "超级会员")
+  @Column(name = "svip")
+  private Boolean svip;
+
   @Schema(description = "简介")
-  @Column(value = "bio")
+  @Column(name = "bio")
   private String bio;
 
   @Schema(description = "头像")
-  @Column(value = "avatar")
+  @Column(name = "avatar")
   private String avatar;
 
   @Schema(description = "密码")
-  @Column(value = "password")
+  @Column(name = "password")
   private String password;
 
   @Schema(description = "密码盐")
-  @Column(value = "pswd_salt")
-  private String passwordSalt;
+  @Column(name = "pswd_salt")
+  private String pswdSalt;
 
   @Schema(description = "邮箱")
-  @Column(value = "email")
+  @Column(name = "email")
   private String email;
 
 }

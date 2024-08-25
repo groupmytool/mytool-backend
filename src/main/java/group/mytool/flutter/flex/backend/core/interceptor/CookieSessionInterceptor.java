@@ -1,13 +1,13 @@
 package group.mytool.flutter.flex.backend.core.interceptor;
 
+import cn.hutool.log.Log;
+import cn.hutool.log.LogFactory;
 import group.mytool.flutter.flex.backend.common.user.entity.po.SessionRecord;
 import group.mytool.flutter.flex.backend.common.user.service.SessionRecordService;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
 import group.mytool.flutter.flex.backend.core.util.SessionUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -16,12 +16,16 @@ import java.time.LocalDateTime;
 
 import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.AUTH_ILLEGAL_TOKEN;
 
-@Slf4j
 @Component
-@RequiredArgsConstructor
 public class CookieSessionInterceptor implements HandlerInterceptor {
 
+  public static final Log logger = LogFactory.get();
+
   private final SessionRecordService sessionRecordService;
+
+  public CookieSessionInterceptor(SessionRecordService sessionRecordService) {
+    this.sessionRecordService = sessionRecordService;
+  }
 
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
@@ -31,7 +35,7 @@ public class CookieSessionInterceptor implements HandlerInterceptor {
       throw SystemException.build(AUTH_ILLEGAL_TOKEN);
     }
     // 不为空校验有效性
-    SessionRecord session = sessionRecordService.getById(token);
+    SessionRecord session = sessionRecordService.selectById(token);
     if (session == null) {
       throw SystemException.build(AUTH_ILLEGAL_TOKEN);
     }
@@ -44,7 +48,7 @@ public class CookieSessionInterceptor implements HandlerInterceptor {
     SessionRecord freshSession = new SessionRecord();
     freshSession.setId(token);
     freshSession.setFreshTime(LocalDateTime.now());
-    sessionRecordService.updateById(freshSession);
+    sessionRecordService.updateFreshTimeById(freshSession);
     return true;
   }
 

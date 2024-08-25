@@ -7,6 +7,11 @@ spring:
   profiles:
     active: dev
 
+mybatis:
+  mapper-locations: classpath:group.mytool.flutter.flex.backend.*.*.mapper/*Mapper.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
 logging:
   file:
     path: logs

@@ -1,7 +1,6 @@
 package group.mytool.flutter.flex.backend.core.config;
 
 import group.mytool.flutter.flex.backend.core.interceptor.CookieSessionInterceptor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
@@ -15,7 +14,6 @@ import static group.mytool.flutter.flex.backend.core.util.Constant.FILE_PREFIX;
 import static group.mytool.flutter.flex.backend.core.util.Constant.MEMBER_CONTROLLER;
 
 @Component
-@RequiredArgsConstructor
 public class MyWebConfiguration implements WebMvcConfigurer {
 
   private final CookieSessionInterceptor sessionInterceptor;
@@ -25,6 +23,10 @@ public class MyWebConfiguration implements WebMvcConfigurer {
   private String uploadFilePath;
   @Value("${mytool.view.page}")
   private String[] views;
+
+  public MyWebConfiguration(CookieSessionInterceptor sessionInterceptor) {
+    this.sessionInterceptor = sessionInterceptor;
+  }
 
   /**
    * 全局拦截，校验session有效性；这个拦截器会拦截跨域的OPTION请求，解决办法是

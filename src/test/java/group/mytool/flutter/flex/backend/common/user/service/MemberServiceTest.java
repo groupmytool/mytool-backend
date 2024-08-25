@@ -1,15 +1,13 @@
 package group.mytool.flutter.flex.backend.common.user.service;
 
-import com.mybatisflex.core.logicdelete.LogicDeleteManager;
-import com.mybatisflex.core.query.QueryWrapper;
+import cn.hutool.log.Log;
+import cn.hutool.log.LogFactory;
 import group.mytool.flutter.flex.backend.FlutterFlexBackendApplicationTests;
-import group.mytool.flutter.flex.backend.common.user.entity.po.User;
 import group.mytool.flutter.flex.backend.common.user.entity.req.LoginParam;
 import group.mytool.flutter.flex.backend.common.user.entity.req.RegisterParam;
 import group.mytool.flutter.flex.backend.common.user.entity.vo.LoginTokenVo;
 import group.mytool.flutter.flex.backend.core.exception.EnumGlobalError;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -26,9 +24,12 @@ import static group.mytool.flutter.flex.backend.common.user.controller.MemberCon
 /**
  * @author adolphor <0haizhu0@gmail.com>
  */
-@Slf4j
-class UserServiceTest extends FlutterFlexBackendApplicationTests {
+class MemberServiceTest extends FlutterFlexBackendApplicationTests {
 
+  public static final Log logger = LogFactory.get();
+
+  @Autowired
+  private MemberService memberService;
   @Autowired
   private UserService userService;
 
@@ -39,15 +40,12 @@ class UserServiceTest extends FlutterFlexBackendApplicationTests {
     registerParam.setUsername(USERNAME);
     registerParam.setPassword(PASSWORD);
 
-    QueryWrapper queryWrapper = userService.query()
-        .eq(User::getUsername, registerParam.getUsername());
-    Runnable runnable = () -> userService.remove(queryWrapper);
-    LogicDeleteManager.execWithoutLogicDelete(runnable);
+    userService.deleteByUserNamePhysical(registerParam.getUsername());
 
-    boolean register = userService.register(registerParam);
-    Assertions.assertTrue(register);
+    String register = memberService.register(registerParam);
+    Assertions.assertTrue(Objects.nonNull(register));
 
-    Executable executable = () -> userService.register(registerParam);
+    Executable executable = () -> memberService.register(registerParam);
     String message = EnumGlobalError.USER_NAME_EXIST.getMessage();
     Assertions.assertThrowsExactly(SystemException.class, executable, message);
 
@@ -60,8 +58,8 @@ class UserServiceTest extends FlutterFlexBackendApplicationTests {
     loginParam.setUsername(USERNAME);
     loginParam.setPassword(PASSWORD);
     loginParam.setClientId(CLIENT_ID);
-    LoginTokenVo loginToken = userService.login(loginParam);
-    log.debug("loginToken: {}", loginToken);
+    LoginTokenVo loginToken = memberService.login(loginParam);
+    logger.debug("loginToken: {}", loginToken);
     Assertions.assertTrue(Objects.nonNull(loginToken));
     Assertions.assertTrue(Objects.nonNull(loginToken.getToken()));
     Assertions.assertTrue(loginToken.getExpireTime().isAfter(LocalDateTime.now()));

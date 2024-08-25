@@ -1,16 +1,15 @@
 package group.mytool.flutter.flex.backend.core.util;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author adolphor <0haizhu0@gmail.com>
  */
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Constant {
+
+  private Constant() {
+  }
 
   public static final String FILE_PREFIX = "/file/image/";
   public static final String MEMBER_CONTROLLER = "/member";

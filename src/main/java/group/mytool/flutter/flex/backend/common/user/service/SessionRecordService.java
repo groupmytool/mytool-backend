@@ -1,8 +1,7 @@
 package group.mytool.flutter.flex.backend.common.user.service;
 
 import cn.hutool.core.date.LocalDateTimeUtil;
-import com.mybatisflex.core.query.QueryWrapper;
-import com.mybatisflex.spring.service.impl.ServiceImpl;
+import cn.hutool.core.util.IdUtil;
 import group.mytool.flutter.flex.backend.common.user.entity.convertor.SessionRecordConvertor;
 import group.mytool.flutter.flex.backend.common.user.entity.po.SessionRecord;
 import group.mytool.flutter.flex.backend.common.user.entity.vo.LoginTokenVo;
@@ -16,13 +15,19 @@ import java.time.temporal.ChronoUnit;
  * @author adolphor <0haizhu0@gmail.com>
  */
 @Service
-public class SessionRecordService extends ServiceImpl<SessionRecordMapper, SessionRecord> {
+public class SessionRecordService {
+
+  private final SessionRecordConvertor convertor;
+  private final SessionRecordMapper mapper;
+
+  public SessionRecordService(SessionRecordConvertor convertor, SessionRecordMapper sessionRecordMapper) {
+    this.convertor = convertor;
+    this.mapper = sessionRecordMapper;
+  }
 
   public LoginTokenVo createLoginToken(String clientId, String userId) {
     // 删除旧的会话记录
-    QueryWrapper delWrapper = this.query()
-        .eq(SessionRecord::getUserId, userId);
-    this.remove(delWrapper);
+    mapper.deleteByUserId(userId);
     // 生成新的会话记录
     SessionRecord sessionRecord = new SessionRecord();
     sessionRecord.setClientId(clientId);
@@ -31,9 +36,18 @@ public class SessionRecordService extends ServiceImpl<SessionRecordMapper, Sessi
     LocalDateTime currentTime = LocalDateTime.now();
     LocalDateTime expireTime = LocalDateTimeUtil.offset(currentTime, 365, ChronoUnit.DAYS);
     sessionRecord.setExpireTime(expireTime);
-    this.save(sessionRecord);
+    sessionRecord.setId(IdUtil.simpleUUID());
+    mapper.login(sessionRecord);
     // 返回会话记录
-    return SessionRecordConvertor.INSTANCE.poToLoginToken(sessionRecord);
+    return convertor.poToLoginToken(sessionRecord);
+  }
+
+  public SessionRecord selectById(String id) {
+    return mapper.selectById(id);
+  }
+
+  public int updateFreshTimeById(SessionRecord sessionRecord) {
+    return mapper.updateFreshTimeById(sessionRecord);
   }
 
 }

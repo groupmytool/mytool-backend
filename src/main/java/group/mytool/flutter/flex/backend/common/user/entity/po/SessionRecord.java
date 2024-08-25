@@ -1,35 +1,35 @@
 package group.mytool.flutter.flex.backend.common.user.entity.po;
 
-import com.mybatisflex.annotation.Column;
-import com.mybatisflex.annotation.Table;
 import group.mytool.flutter.flex.backend.core.entity.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-@Table("common_session_record")
+@Table(name = "common_session_record")
 public class SessionRecord extends BaseEntity {
 
   @Schema(description = "客户端标记ID")
-  @Column(value = "client_id")
+  @Column(name = "client_id")
   private String clientId;
 
   @Schema(description = "用户ID")
-  @Column(value = "user_id")
+  @Column(name = "user_id")
   private String userId;
 
   @Schema(description = "登录时间")
-  @Column(value = "login_time")
+  @Column(name = "login_time")
   private LocalDateTime loginTime;
 
   @Schema(description = "最近访问时间")
-  @Column(value = "fresh_time")
+  @Column(name = "fresh_time")
   private LocalDateTime freshTime;
 
   @Schema(description = "过期时间")
-  @Column(value = "expire_time")
+  @Column(name = "expire_time")
   private LocalDateTime expireTime;
 
 }

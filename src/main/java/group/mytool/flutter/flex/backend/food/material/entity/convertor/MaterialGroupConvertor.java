@@ -5,17 +5,16 @@ import group.mytool.flutter.flex.backend.food.material.entity.po.MaterialGroup;
 import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialGroupChildVo;
 import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialGroupTopVo;
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
+
+import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 
 /**
  * @author adolphor <0haizhu0@gmail.com>
  */
-@Mapper
+@Mapper(componentModel = SPRING)
 public interface MaterialGroupConvertor {
-
-  MaterialGroupConvertor INSTANCE = Mappers.getMapper(MaterialGroupConvertor.class);
 
   MaterialGroupDto doToDto(MaterialGroup materialGroup);
 

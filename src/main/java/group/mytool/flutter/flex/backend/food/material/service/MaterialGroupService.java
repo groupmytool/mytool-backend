@@ -1,6 +1,5 @@
 package group.mytool.flutter.flex.backend.food.material.service;
 
-import com.mybatisflex.spring.service.impl.ServiceImpl;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
 import group.mytool.flutter.flex.backend.food.material.entity.convertor.MaterialGroupConvertor;
 import group.mytool.flutter.flex.backend.food.material.entity.dto.MaterialGroupDto;
@@ -23,7 +22,16 @@ import static group.mytool.flutter.flex.backend.core.util.Constant.NODE_ROOT;
  * @author adolphor <0haizhu0@gmail.com>
  */
 @Service
-public class MaterialGroupService extends ServiceImpl<MaterialGroupMapper, MaterialGroup> {
+public class MaterialGroupService {
+
+  private final MaterialGroupConvertor convertor;
+  private final MaterialGroupMapper mapper;
+
+  public MaterialGroupService(MaterialGroupConvertor convertor,
+                              MaterialGroupMapper materialGroupMapper) {
+    this.convertor = convertor;
+    this.mapper = materialGroupMapper;
+  }
 
   /**
    * 获取顶层食材分组树
@@ -33,7 +41,7 @@ public class MaterialGroupService extends ServiceImpl<MaterialGroupMapper, Mater
   public List<MaterialGroupTopVo> getMaterialGroupTopTree() {
     List<MaterialGroupDto> rootList = new ArrayList<>();
     List<MaterialGroup> groupList = mapper.selectAll();
-    List<MaterialGroupDto> groupVoList = MaterialGroupConvertor.INSTANCE.doToDtoList(groupList);
+    List<MaterialGroupDto> groupVoList = convertor.doToDtoList(groupList);
     HashMap<String, MaterialGroupDto> tempMap = new HashMap<>();
     for (MaterialGroupDto groupVo : groupVoList) {
       if (!Objects.equals(NODE_ROOT, groupVo.getParentId())) {
@@ -55,7 +63,7 @@ public class MaterialGroupService extends ServiceImpl<MaterialGroupMapper, Mater
       }
       parent.getChildren().add(groupVo);
     }
-    List<MaterialGroupTopVo> materialGroupTopVos = MaterialGroupConvertor.INSTANCE.dtoToTopVoList(rootList);
+    List<MaterialGroupTopVo> materialGroupTopVos = convertor.dtoToTopVoList(rootList);
     materialGroupTopVos.sort(Comparator.comparingInt(MaterialGroupTopVo::getSort));
     return materialGroupTopVos;
   }

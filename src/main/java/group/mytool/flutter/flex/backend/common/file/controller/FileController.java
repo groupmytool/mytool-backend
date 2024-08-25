@@ -2,7 +2,6 @@ package group.mytool.flutter.flex.backend.common.file.controller;
 
 import group.mytool.flutter.flex.backend.common.file.entity.UploadFile;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.UPLOAD_FILE_ERROR;
 import static group.mytool.flutter.flex.backend.core.util.Constant.FILE_PREFIX;
 
-@Slf4j
 @RestController
 @RequestMapping("/file")
 public class FileController {

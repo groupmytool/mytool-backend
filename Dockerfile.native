@@ -1,0 +1,10 @@
+FROM bellsoft/liberica-native-image-kit-container:jdk-22-nik-24.0.2-glibc as builder
+WORKDIR /home/build
+COPY . /home/build/
+RUN ./mvnw -Pnative clean -DskipTests native:compile
+
+FROM bellsoft/alpaquita-linux-base:stream-glibc-240821
+WORKDIR /home/myapp
+COPY --from=builder /home/build/target/flutter-flex-backend .
+EXPOSE 8080
+CMD ["/bin/sh", "-c", "/home/myapp/flutter-flex-backend"]
