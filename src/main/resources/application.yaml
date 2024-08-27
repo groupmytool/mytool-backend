@@ -12,6 +12,12 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
+mytool:
+  view:
+    page: /view/**
+  upload:
+    path: /home/mytool
+
 logging:
   file:
     path: logs
