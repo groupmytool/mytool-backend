@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.68.8:3306/mytool?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    username: MyTool
+    password: MyTool!@#123
+
+mytool:
+  view:
+    page: /view/**
+  upload:
+    path: /Users/adolphor/Downloads/mytool
