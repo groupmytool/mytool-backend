@@ -8,8 +8,8 @@ import group.mytool.flutter.flex.backend.core.exception.SystemException;
 import group.mytool.flutter.flex.backend.core.util.SessionUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.time.LocalDateTime;
@@ -31,7 +31,7 @@ public class CookieSessionInterceptor implements HandlerInterceptor {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
     // 开始校验token
     String token = SessionUtil.getToken();
-    if (StringUtils.isEmpty(token)) {
+    if (!StringUtils.hasText(token)) {
       throw SystemException.build(AUTH_ILLEGAL_TOKEN);
     }
     // 不为空校验有效性

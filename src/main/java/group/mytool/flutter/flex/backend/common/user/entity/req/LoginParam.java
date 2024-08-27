@@ -1,6 +1,5 @@
 package group.mytool.flutter.flex.backend.common.user.entity.req;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -14,16 +13,16 @@ public class LoginParam {
   public static final String passwordNotNullMessage = "密码不能为空";
   public static final String clientIdNotNullMessage = "客户端标记ID不能为空";
 
+  /** 客户端标记ID */
   @NotNull(message = clientIdNotNullMessage)
-  @Schema(description = "客户端标记ID")
   private String clientId;
 
+  /** 用户名 */
   @NotNull(message = usernameNotNullMessage)
-  @Schema(description = "用户名")
   private String username;
 
+  /** 密码 */
   @NotNull(message = passwordNotNullMessage)
-  @Schema(description = "密码")
   private String password;
 
 }

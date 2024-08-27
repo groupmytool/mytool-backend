@@ -35,4 +35,4 @@ build/
 ### log ###
 *.log
 
-.DS_Stor
+.DS_Store

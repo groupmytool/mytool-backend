@@ -2,7 +2,6 @@ package group.mytool.flutter.flex.backend.common.user.entity.req;
 
 import group.mytool.flutter.flex.backend.core.util.validator.ValidPassword;
 import group.mytool.flutter.flex.backend.core.util.validator.ValidUsername;
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -18,16 +17,16 @@ public class RegisterParam {
   public static final String passwordNotNullMessage = "密码不能为空";
   public static final String passwordSizeMessage = "密码长度必须大于8";
 
+  /** 用户名 */
   @ValidUsername
   @Size(min = 3, message = usernameSizeMessage)
   @NotNull(message = usernameNotNullMessage)
-  @Schema(description = "用户名")
   private String username;
 
+  /** 密码 */
   @ValidPassword
   @Size(min = 8, message = passwordSizeMessage)
   @NotNull(message = passwordNotNullMessage)
-  @Schema(description = "密码")
   private String password;
 
 }
