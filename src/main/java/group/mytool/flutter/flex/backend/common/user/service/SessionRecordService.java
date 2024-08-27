@@ -1,11 +1,10 @@
 package group.mytool.flutter.flex.backend.common.user.service;
 
-import cn.hutool.core.date.LocalDateTimeUtil;
-import cn.hutool.core.util.IdUtil;
 import group.mytool.flutter.flex.backend.common.user.entity.convertor.SessionRecordConvertor;
 import group.mytool.flutter.flex.backend.common.user.entity.po.SessionRecord;
 import group.mytool.flutter.flex.backend.common.user.entity.vo.LoginTokenVo;
 import group.mytool.flutter.flex.backend.common.user.mapper.SessionRecordMapper;
+import group.mytool.flutter.flex.backend.core.util.IdUtil;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -34,7 +33,7 @@ public class SessionRecordService {
     sessionRecord.setUserId(userId);
     // 设置过期时间：currentTime + 365天
     LocalDateTime currentTime = LocalDateTime.now();
-    LocalDateTime expireTime = LocalDateTimeUtil.offset(currentTime, 365, ChronoUnit.DAYS);
+    LocalDateTime expireTime = currentTime.plus(365, ChronoUnit.DAYS);
     sessionRecord.setExpireTime(expireTime);
     sessionRecord.setId(IdUtil.simpleUUID());
     mapper.login(sessionRecord);

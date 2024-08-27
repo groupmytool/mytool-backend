@@ -1,13 +1,13 @@
 package group.mytool.flutter.flex.backend.core.interceptor;
 
-import cn.hutool.log.Log;
-import cn.hutool.log.LogFactory;
 import group.mytool.flutter.flex.backend.common.user.entity.po.SessionRecord;
 import group.mytool.flutter.flex.backend.common.user.service.SessionRecordService;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
 import group.mytool.flutter.flex.backend.core.util.SessionUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -19,7 +19,7 @@ import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.A
 @Component
 public class CookieSessionInterceptor implements HandlerInterceptor {
 
-  public static final Log logger = LogFactory.get();
+  private static final Logger logger = LoggerFactory.getLogger(CookieSessionInterceptor.class);
 
   private final SessionRecordService sessionRecordService;
 

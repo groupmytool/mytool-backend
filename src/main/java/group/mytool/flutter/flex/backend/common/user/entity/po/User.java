@@ -4,8 +4,10 @@ import group.mytool.flutter.flex.backend.core.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "common_user")
 public class User extends BaseEntity {
 

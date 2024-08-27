@@ -4,10 +4,12 @@ import group.mytool.flutter.flex.backend.core.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "common_session_record")
 public class SessionRecord extends BaseEntity {
 

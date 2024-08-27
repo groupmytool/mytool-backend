@@ -1,9 +1,5 @@
 package group.mytool.flutter.flex.backend.common.user.service;
 
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.crypto.digest.DigestUtil;
-import cn.hutool.log.Log;
-import cn.hutool.log.LogFactory;
 import group.mytool.flutter.flex.backend.common.user.entity.convertor.UserConvertor;
 import group.mytool.flutter.flex.backend.common.user.entity.po.User;
 import group.mytool.flutter.flex.backend.common.user.entity.req.LoginParam;
@@ -11,6 +7,10 @@ import group.mytool.flutter.flex.backend.common.user.entity.req.RegisterParam;
 import group.mytool.flutter.flex.backend.common.user.entity.vo.LoginTokenVo;
 import group.mytool.flutter.flex.backend.common.user.mapper.UserMapper;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
+import group.mytool.flutter.flex.backend.core.util.IdUtil;
+import group.mytool.flutter.flex.backend.core.util.Md5Util;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -24,7 +24,7 @@ import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.U
 @Service
 public class MemberService {
 
-  public static final Log logger = LogFactory.get();
+  private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
 
   private final UserConvertor convertor;
   private final UserMapper mapper;
@@ -49,7 +49,7 @@ public class MemberService {
     // 生成盐值
     po.setPswdSalt(IdUtil.simpleUUID());
     // 密码加密
-    String md5Hex = DigestUtil.md5Hex(po.getPassword() + po.getPswdSalt());
+    String md5Hex = Md5Util.md5(po.getPassword() + po.getPswdSalt());
     po.setPassword(md5Hex);
     // 检查用户名是否已存在
     synchronized (MemberService.class) {
@@ -78,7 +78,7 @@ public class MemberService {
       // 用户不存在
       throw SystemException.build(LOGIN_ACCOUNT_ERROR);
     }
-    String md5Hex = DigestUtil.md5Hex(loginParam.getPassword() + user.getPswdSalt());
+    String md5Hex = Md5Util.md5(loginParam.getPassword() + user.getPswdSalt());
     if (!md5Hex.equals(user.getPassword())) {
       throw SystemException.build(LOGIN_ACCOUNT_ERROR);
     }

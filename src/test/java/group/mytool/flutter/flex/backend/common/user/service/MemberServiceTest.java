@@ -1,7 +1,5 @@
 package group.mytool.flutter.flex.backend.common.user.service;
 
-import cn.hutool.log.Log;
-import cn.hutool.log.LogFactory;
 import group.mytool.flutter.flex.backend.FlutterFlexBackendApplicationTests;
 import group.mytool.flutter.flex.backend.common.user.entity.req.LoginParam;
 import group.mytool.flutter.flex.backend.common.user.entity.req.RegisterParam;
@@ -12,6 +10,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
@@ -26,7 +26,7 @@ import static group.mytool.flutter.flex.backend.common.user.controller.MemberCon
  */
 class MemberServiceTest extends FlutterFlexBackendApplicationTests {
 
-  public static final Log logger = LogFactory.get();
+  public static final Logger logger = LoggerFactory.getLogger(MemberServiceTest.class);
 
   @Autowired
   private MemberService memberService;

@@ -1,9 +1,9 @@
 package group.mytool.flutter.flex.backend.core.config;
 
-import cn.hutool.log.Log;
-import cn.hutool.log.LogFactory;
 import group.mytool.flutter.flex.backend.core.entity.Result;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -21,7 +21,7 @@ import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.S
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-  private static final Log logger = LogFactory.get();
+  private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
   
   @ExceptionHandler(SystemException.class)
   @ResponseStatus(HttpStatus.OK)

@@ -4,11 +4,13 @@ import group.mytool.flutter.flex.backend.core.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author adolphor <0haizhu0@gmail.com>
  */
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "food_material_group")
 public class MaterialGroup extends BaseEntity {
 
