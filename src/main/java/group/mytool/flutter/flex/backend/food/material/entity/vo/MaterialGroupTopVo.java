@@ -2,8 +2,6 @@ package group.mytool.flutter.flex.backend.food.material.entity.vo;
 
 import lombok.Data;
 
-import java.util.List;
-
 /**
  * @author adolphor <0haizhu0@gmail.com>
  */
@@ -18,8 +16,5 @@ public class MaterialGroupTopVo {
 
   /** 排序 */
   private Integer sort;
-
-  /** 子节点 */
-  private List<MaterialGroupTopVo> children;
 
 }

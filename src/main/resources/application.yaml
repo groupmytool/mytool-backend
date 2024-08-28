@@ -7,11 +7,6 @@ spring:
   profiles:
     active: dev
 
-mybatis:
-  mapper-locations: classpath:group.mytool.flutter.flex.backend.*.*.mapper/*Mapper.xml
-  configuration:
-    map-underscore-to-camel-case: true
-
 mytool:
   view:
     page: /view/**
@@ -21,3 +16,7 @@ mytool:
 logging:
   file:
     path: logs
+  level:
+    com:
+      zaxxer:
+        hikari: DEBUG

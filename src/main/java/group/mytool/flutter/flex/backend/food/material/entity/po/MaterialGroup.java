@@ -1,8 +1,8 @@
 package group.mytool.flutter.flex.backend.food.material.entity.po;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import group.mytool.flutter.flex.backend.core.entity.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,19 +11,19 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "food_material_group")
+@TableName("food_material_group")
 public class MaterialGroup extends BaseEntity {
 
   /** 父节点ID */
-  @Column(name = "parent_id")
+  @TableField("parent_id")
   private String parentId;
 
   /** 名称 */
-  @Column(name = "group_name")
+  @TableField("group_name")
   private String name;
 
   /** 排序 */
-  @Column(name = "group_sort")
+  @TableField("group_sort")
   private Integer sort;
 
 }

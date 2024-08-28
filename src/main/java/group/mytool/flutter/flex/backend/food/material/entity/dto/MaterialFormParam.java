@@ -1,4 +1,4 @@
-package group.mytool.flutter.flex.backend.food.material.entity.req;
+package group.mytool.flutter.flex.backend.food.material.entity.dto;
 
 import group.mytool.flutter.flex.backend.food.material.entity.po.Material;
 import lombok.Data;

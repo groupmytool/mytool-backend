@@ -1,8 +1,8 @@
 package group.mytool.flutter.flex.backend.common.user.service;
 
 import group.mytool.flutter.flex.backend.FlutterFlexBackendApplicationTests;
-import group.mytool.flutter.flex.backend.common.user.entity.req.LoginParam;
-import group.mytool.flutter.flex.backend.common.user.entity.req.RegisterParam;
+import group.mytool.flutter.flex.backend.common.user.entity.dto.LoginParam;
+import group.mytool.flutter.flex.backend.common.user.entity.dto.RegisterParam;
 import group.mytool.flutter.flex.backend.common.user.entity.vo.LoginTokenVo;
 import group.mytool.flutter.flex.backend.core.exception.EnumGlobalError;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
@@ -42,8 +42,8 @@ class MemberServiceTest extends FlutterFlexBackendApplicationTests {
 
     userService.deleteByUserNamePhysical(registerParam.getUsername());
 
-    String register = memberService.register(registerParam);
-    Assertions.assertTrue(Objects.nonNull(register));
+    boolean register = memberService.register(registerParam);
+    Assertions.assertTrue(register);
 
     Executable executable = () -> memberService.register(registerParam);
     String message = EnumGlobalError.USER_NAME_EXIST.getMessage();

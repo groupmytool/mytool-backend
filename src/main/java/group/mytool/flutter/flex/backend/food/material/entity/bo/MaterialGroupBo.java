@@ -1,4 +1,4 @@
-package group.mytool.flutter.flex.backend.food.material.entity.dto;
+package group.mytool.flutter.flex.backend.food.material.entity.bo;
 
 import group.mytool.flutter.flex.backend.food.material.entity.po.MaterialGroup;
 import group.mytool.flutter.flex.backend.food.material.entity.vo.MaterialVo;
@@ -12,10 +12,10 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class MaterialGroupDto extends MaterialGroup {
+public class MaterialGroupBo extends MaterialGroup {
 
   /** 子节点 */
-  private List<MaterialGroupDto> children;
+  private List<MaterialGroupBo> children;
 
   /** 食材列表 */
   private List<MaterialVo> materials;

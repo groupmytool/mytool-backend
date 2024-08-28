@@ -1,46 +1,46 @@
 package group.mytool.flutter.flex.backend.common.user.entity.po;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import group.mytool.flutter.flex.backend.core.entity.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "common_user")
+@TableName("common_user")
 public class User extends BaseEntity {
 
   /** 用户名 */
-  @Column(name = "username")
+  @TableField("username")
   private String username;
 
   /** 昵称 */
-  @Column(name = "nikename")
+  @TableField("nickname")
   private String nickname;
 
   /** 超级会员 */
-  @Column(name = "svip")
+  @TableField("svip")
   private Boolean svip;
 
   /** 简介 */
-  @Column(name = "bio")
+  @TableField("bio")
   private String bio;
 
   /** 头像 */
-  @Column(name = "avatar")
+  @TableField("avatar")
   private String avatar;
 
   /** 密码 */
-  @Column(name = "password")
+  @TableField("password")
   private String password;
 
   /** 密码盐 */
-  @Column(name = "pswd_salt")
+  @TableField("pswd_salt")
   private String pswdSalt;
 
   /** 邮箱 */
-  @Column(name = "email")
+  @TableField("email")
   private String email;
 
 }

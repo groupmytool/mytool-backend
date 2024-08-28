@@ -10,7 +10,10 @@ import java.time.LocalDateTime;
 @Data
 public class LoginTokenVo {
 
+  /** token */
   private String token;
+
+  /** 过期时间 */
   private LocalDateTime expireTime;
 
 }

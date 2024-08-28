@@ -1,8 +1,8 @@
 package group.mytool.flutter.flex.backend.common.user.controller;
 
 import group.mytool.flutter.flex.backend.common.BaseValidateTest;
-import group.mytool.flutter.flex.backend.common.user.entity.req.LoginParam;
-import group.mytool.flutter.flex.backend.common.user.entity.req.RegisterParam;
+import group.mytool.flutter.flex.backend.common.user.entity.dto.LoginParam;
+import group.mytool.flutter.flex.backend.common.user.entity.dto.RegisterParam;
 import group.mytool.flutter.flex.backend.core.util.IdUtil;
 import group.mytool.flutter.flex.backend.core.util.validator.ValidPassword;
 import group.mytool.flutter.flex.backend.core.util.validator.ValidUsername;

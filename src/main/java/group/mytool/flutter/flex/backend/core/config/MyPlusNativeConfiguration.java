@@ -1,5 +1,22 @@
 package group.mytool.flutter.flex.backend.core.config;
 
+import com.baomidou.mybatisplus.annotation.IEnum;
+import com.baomidou.mybatisplus.core.MybatisParameterHandler;
+import com.baomidou.mybatisplus.core.MybatisXMLLanguageDriver;
+import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.core.handlers.CompositeEnumTypeHandler;
+import com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler;
+import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
+import com.baomidou.mybatisplus.core.toolkit.support.SerializedLambda;
+import com.baomidou.mybatisplus.extension.handlers.FastjsonTypeHandler;
+import com.baomidou.mybatisplus.extension.handlers.GsonTypeHandler;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.annotations.DeleteProvider;
 import org.apache.ibatis.annotations.InsertProvider;
@@ -57,7 +74,6 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.annotation.Annotation;
-import java.lang.invoke.SerializedLambda;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -75,23 +91,42 @@ import java.util.stream.Stream;
  * This configuration will move to mybatis-spring-native.
  */
 @Configuration(proxyBeanMethods = false)
-@ImportRuntimeHints(MyBatisNativeConfiguration.MyBaitsRuntimeHintsRegistrar.class)
-public class MyBatisNativeConfiguration {
-
-  @Bean
-  MyBatisBeanFactoryInitializationAotProcessor myBatisBeanFactoryInitializationAotProcessor() {
-    return new MyBatisBeanFactoryInitializationAotProcessor();
-  }
+@ImportRuntimeHints(MyPlusNativeConfiguration.MyBaitsRuntimeHintsRegistrar.class)
+public class MyPlusNativeConfiguration {
 
   @Bean
   static MyBatisMapperFactoryBeanPostProcessor myBatisMapperFactoryBeanPostProcessor() {
     return new MyBatisMapperFactoryBeanPostProcessor();
   }
 
+  @Bean
+  MyBatisBeanFactoryInitializationAotProcessor myBatisBeanFactoryInitializationAotProcessor() {
+    return new MyBatisBeanFactoryInitializationAotProcessor();
+  }
+
   static class MyBaitsRuntimeHintsRegistrar implements RuntimeHintsRegistrar {
 
     @Override
     public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
+
+      Stream.of(
+          "org/apache/ibatis/builder/xml/*.dtd",
+          "org/apache/ibatis/builder/xml/*.xsd"
+      ).forEach(hints.resources()::registerPattern);
+
+      Stream.of(
+          SerializedLambda.class,
+          SFunction.class,
+          java.lang.invoke.SerializedLambda.class
+      ).forEach(hints.serialization()::registerType);
+
+      Stream.of(
+          StatementHandler.class,
+          Executor.class,
+          ResultSetHandler.class,
+          ParameterHandler.class
+      ).forEach(hints.proxies()::registerJdkProxy);
+
       Stream.of(RawLanguageDriver.class,
           XMLLanguageDriver.class,
           RuntimeSupport.class,
@@ -113,26 +148,46 @@ public class MyBatisNativeConfiguration {
           ArrayList.class,
           HashMap.class,
           TreeSet.class,
-          HashSet.class
-      ).forEach(x -> hints.reflection().registerType(x, MemberCategory.values()));
+          HashSet.class,
+          MybatisXMLLanguageDriver.class,
+          MybatisSqlSessionFactoryBean.class,
+          SFunction.class,
+          SerializedLambda.class,
+          java.lang.invoke.SerializedLambda.class,
+          MybatisPlusInterceptor.class,
+          AbstractWrapper.class,
+          LambdaQueryWrapper.class,
+          LambdaUpdateWrapper.class,
+          UpdateWrapper.class,
+          QueryWrapper.class
+      ).forEach(clazz -> hints.reflection().registerType(clazz, MemberCategory.values()));
+
       Stream.of(
-          "org/apache/ibatis/builder/xml/*.dtd",
-          "org/apache/ibatis/builder/xml/*.xsd"
-      ).forEach(hints.resources()::registerPattern);
+          BoundSql.class,
+          RoutingStatementHandler.class,
+          BaseStatementHandler.class,
+          MybatisParameterHandler.class
+      ).forEach(clazz -> hints.reflection().registerType(clazz, MemberCategory.DECLARED_FIELDS));
 
-      hints.serialization().registerType(SerializedLambda.class);
-      hints.serialization().registerType(java.lang.invoke.SerializedLambda.class);
-      hints.reflection().registerType(SerializedLambda.class);
-      hints.reflection().registerType(java.lang.invoke.SerializedLambda.class);
+      Stream.of(
+          BoundSql.class,
+          RoutingStatementHandler.class,
+          BaseStatementHandler.class,
+          MybatisParameterHandler.class
+      ).forEach(clazz -> hints.reflection().registerType(clazz, MemberCategory.DECLARED_FIELDS));
 
-      hints.proxies().registerJdkProxy(StatementHandler.class);
-      hints.proxies().registerJdkProxy(Executor.class);
-      hints.proxies().registerJdkProxy(ResultSetHandler.class);
-      hints.proxies().registerJdkProxy(ParameterHandler.class);
+      Stream.of(
+          IEnum.class
+      ).forEach(clazz -> hints.reflection().registerType(clazz, MemberCategory.INVOKE_PUBLIC_METHODS));
 
-      hints.reflection().registerType(BoundSql.class, MemberCategory.DECLARED_FIELDS);
-      hints.reflection().registerType(RoutingStatementHandler.class, MemberCategory.DECLARED_FIELDS);
-      hints.reflection().registerType(BaseStatementHandler.class, MemberCategory.DECLARED_FIELDS);
+      Stream.of(
+          CompositeEnumTypeHandler.class,
+          FastjsonTypeHandler.class,
+          GsonTypeHandler.class,
+          JacksonTypeHandler.class,
+          MybatisEnumTypeHandler.class
+      ).forEach(clazz -> hints.reflection().registerType(clazz, MemberCategory.INVOKE_PUBLIC_CONSTRUCTORS));
+
     }
   }
 
@@ -160,15 +215,14 @@ public class MyBatisNativeConfiguration {
         RuntimeHints hints = context.getRuntimeHints();
         for (String beanName : beanNames) {
           BeanDefinition beanDefinition = beanFactory.getBeanDefinition(beanName.substring(1));
-          PropertyValue mapperInterface = beanDefinition.getPropertyValues()
-              .getPropertyValue("mapperInterface");
+          PropertyValue mapperInterface = beanDefinition.getPropertyValues().getPropertyValue("mapperInterface");
           if (mapperInterface != null && mapperInterface.getValue() != null) {
             Class<?> mapperInterfaceType = (Class<?>) mapperInterface.getValue();
             if (mapperInterfaceType != null) {
               registerReflectionTypeIfNecessary(mapperInterfaceType, hints);
               hints.proxies().registerJdkProxy(mapperInterfaceType);
-              hints.resources().registerPattern(mapperInterfaceType.getName()
-                  .replace('.', '/').concat(".xml"));
+              hints.resources()
+                  .registerPattern(mapperInterfaceType.getName().replace('.', '/').concat(".xml"));
               registerMapperRelationships(mapperInterfaceType, hints);
             }
           }

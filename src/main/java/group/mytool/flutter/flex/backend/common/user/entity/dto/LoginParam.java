@@ -1,4 +1,4 @@
-package group.mytool.flutter.flex.backend.common.user.entity.req;
+package group.mytool.flutter.flex.backend.common.user.entity.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

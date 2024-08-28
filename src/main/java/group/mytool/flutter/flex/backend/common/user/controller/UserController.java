@@ -1,6 +1,7 @@
 package group.mytool.flutter.flex.backend.common.user.controller;
 
 import group.mytool.flutter.flex.backend.common.user.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,12 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @author adolphor <0haizhu0@gmail.com>
  */
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/user")
 public class UserController {
 
   private final UserService userService;
 
-  public UserController(UserService userService) {
-    this.userService = userService;
-  }
 }

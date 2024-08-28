@@ -1,18 +1,20 @@
 package group.mytool.flutter.flex.backend.common.user.service;
 
+import group.mytool.flutter.flex.backend.common.user.dao.UserDao;
 import group.mytool.flutter.flex.backend.common.user.entity.convertor.UserConvertor;
+import group.mytool.flutter.flex.backend.common.user.entity.dto.LoginParam;
+import group.mytool.flutter.flex.backend.common.user.entity.dto.RegisterParam;
 import group.mytool.flutter.flex.backend.common.user.entity.po.User;
-import group.mytool.flutter.flex.backend.common.user.entity.req.LoginParam;
-import group.mytool.flutter.flex.backend.common.user.entity.req.RegisterParam;
 import group.mytool.flutter.flex.backend.common.user.entity.vo.LoginTokenVo;
-import group.mytool.flutter.flex.backend.common.user.mapper.UserMapper;
 import group.mytool.flutter.flex.backend.core.exception.SystemException;
 import group.mytool.flutter.flex.backend.core.util.IdUtil;
 import group.mytool.flutter.flex.backend.core.util.Md5Util;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.LOGIN_ACCOUNT_ERROR;
@@ -22,21 +24,15 @@ import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.U
  * @author adolphor <0haizhu0@gmail.com>
  */
 @Service
-public class MemberService {
+@RequiredArgsConstructor
+public class MemberService implements Serializable {
 
+  private static final long serialVersionUID = 1L;
   private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
 
   private final UserConvertor convertor;
-  private final UserMapper mapper;
+  private final UserDao userDao;
   private final SessionRecordService sessionRecordService;
-
-  public MemberService(UserConvertor convertor,
-                       UserMapper userMapper,
-                       SessionRecordService sessionRecordService) {
-    this.convertor = convertor;
-    this.mapper = userMapper;
-    this.sessionRecordService = sessionRecordService;
-  }
 
   /**
    * 用户注册
@@ -44,7 +40,7 @@ public class MemberService {
    * @param registerParam 注册参数
    * @return 注册结果
    */
-  public String register(RegisterParam registerParam) {
+  public boolean register(RegisterParam registerParam) {
     User po = convertor.regParamToPo(registerParam);
     // 生成盐值
     po.setPswdSalt(IdUtil.simpleUUID());
@@ -53,17 +49,16 @@ public class MemberService {
     po.setPassword(md5Hex);
     // 检查用户名是否已存在
     synchronized (MemberService.class) {
-      User user = mapper.selectByUsername(po.getUsername());
+      User user = userDao.selectByUsername(registerParam.getUsername());
       if (Objects.nonNull(user)) {
         // 用户名已存在
         throw SystemException.build(USER_NAME_EXIST);
       }
       // 保存用户
-      po.setId(IdUtil.simpleUUID());
       po.setSvip(false);
-      mapper.register(po);
+      userDao.save(po);
     }
-    return po.getId();
+    return true;
   }
 
   /**
@@ -73,7 +68,7 @@ public class MemberService {
    * @return
    */
   public LoginTokenVo login(LoginParam loginParam) {
-    User user = mapper.selectByUsername(loginParam.getUsername());
+    User user = userDao.selectByUsername(loginParam.getUsername());
     if (Objects.isNull(user)) {
       // 用户不存在
       throw SystemException.build(LOGIN_ACCOUNT_ERROR);

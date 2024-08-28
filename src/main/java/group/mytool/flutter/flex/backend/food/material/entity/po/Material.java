@@ -1,8 +1,8 @@
 package group.mytool.flutter.flex.backend.food.material.entity.po;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import group.mytool.flutter.flex.backend.core.entity.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,23 +13,31 @@ import java.time.LocalDate;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "food_material")
+@TableName("food_material")
 public class Material extends BaseEntity {
 
+  /** 分组ID */
+  @TableField("group_id")
+  private String groupId;
+
   /** 名称 */
-  @Column(name = "material_name")
+  @TableField("material_name")
   private String name;
 
   /** 单位 */
-  @Column(name = "material_unit")
+  @TableField("material_unit")
   private String unit;
 
   /** 图片 */
-  @Column(name = "material_image_url")
+  @TableField("material_image_url")
   private String imageUrl;
 
   /** 保质期 */
-  @Column(name = "material_shelf_life")
+  @TableField("material_shelf_life")
   private LocalDate shelfLife;
+
+  /** 排序 */
+  @TableField("material_sort")
+  private Integer sort;
 
 }

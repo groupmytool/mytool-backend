@@ -6,8 +6,7 @@ import group.mytool.flutter.flex.backend.core.exception.SystemException;
 import group.mytool.flutter.flex.backend.core.util.SessionUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -16,10 +15,9 @@ import java.time.LocalDateTime;
 
 import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.AUTH_ILLEGAL_TOKEN;
 
+@Slf4j
 @Component
 public class CookieSessionInterceptor implements HandlerInterceptor {
-
-  private static final Logger logger = LoggerFactory.getLogger(CookieSessionInterceptor.class);
 
   private final SessionRecordService sessionRecordService;
 

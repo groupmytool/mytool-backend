@@ -1,4 +1,4 @@
-package group.mytool.flutter.flex.backend.common.user.entity.req;
+package group.mytool.flutter.flex.backend.common.user.entity.dto;
 
 import group.mytool.flutter.flex.backend.core.util.validator.ValidPassword;
 import group.mytool.flutter.flex.backend.core.util.validator.ValidUsername;

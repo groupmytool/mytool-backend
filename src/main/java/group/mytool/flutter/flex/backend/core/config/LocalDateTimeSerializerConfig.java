@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * 日期格式化
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 public class LocalDateTimeSerializerConfig {
 
   @Value("${spring.jackson.date-format:yyyy-MM-dd HH:mm:ss}")
