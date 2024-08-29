@@ -1,4 +1,4 @@
-package group.mytool.flutter.flex.backend.food.material.entity.dto;
+package group.mytool.flutter.flex.backend.food.material.entity.req;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

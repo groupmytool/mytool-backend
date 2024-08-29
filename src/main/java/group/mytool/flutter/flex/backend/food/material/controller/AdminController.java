@@ -1,7 +1,7 @@
 package group.mytool.flutter.flex.backend.food.material.controller;
 
 import group.mytool.flutter.flex.backend.core.entity.Result;
-import group.mytool.flutter.flex.backend.food.material.entity.dto.MaterialGroupFromParam;
+import group.mytool.flutter.flex.backend.food.material.entity.req.MaterialGroupFromParam;
 import group.mytool.flutter.flex.backend.food.material.service.MaterialGroupService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
