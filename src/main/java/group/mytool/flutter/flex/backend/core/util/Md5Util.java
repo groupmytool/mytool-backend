@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 public class Md5Util {
   public static String md5(String input) {

@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 @Data
 public class MaterialGroupChildVo {

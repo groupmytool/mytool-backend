@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 /**
  * ${table.comment!} 查询对象
  *
- * @author MyTool <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 import static group.mytool.flutter.flex.backend.core.util.Constant.NODE_ROOT;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 @Slf4j
 @Service

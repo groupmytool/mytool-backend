@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 @Slf4j
 @Service

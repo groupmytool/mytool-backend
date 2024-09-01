@@ -5,7 +5,7 @@ import group.mytool.flutter.flex.backend.common.user.entity.po.SessionRecord;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 @Mapper
 public interface SessionRecordMapper extends BaseMapper<SessionRecord> {

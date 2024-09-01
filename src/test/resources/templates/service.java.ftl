@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 /**
 * ${table.comment!} 业务逻辑层
 *
-* @author MyTool <0haizhu0@gmail.com>
+* @author 麦途 <0haizhu0@gmail.com>
 */
 @Slf4j
 @Service

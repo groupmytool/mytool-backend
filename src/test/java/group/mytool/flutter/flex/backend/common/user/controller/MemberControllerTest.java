@@ -14,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.Set;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 @SpringBootTest
 public class MemberControllerTest extends BaseValidateTest {

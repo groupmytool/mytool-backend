@@ -10,7 +10,7 @@ import org.graalvm.nativeimage.hosted.RuntimeSerialization;
 /**
  * 这里需要将lambda表达式所使用的成员类都注册上来,具体情况视项目情况而定,一般扫描@Controller和@Service的会多点.
  *
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 public class MyPlusLambdaRegistrationFeature implements Feature {
 

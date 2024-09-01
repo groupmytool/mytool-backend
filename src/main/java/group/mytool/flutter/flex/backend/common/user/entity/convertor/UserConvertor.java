@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 @Mapper(componentModel = SPRING)
 public interface UserConvertor {

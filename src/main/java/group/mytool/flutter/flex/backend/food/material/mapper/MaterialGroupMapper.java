@@ -6,7 +6,7 @@ import group.mytool.flutter.flex.backend.food.material.entity.po.MaterialGroup;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 @Mapper
 public interface MaterialGroupMapper extends BaseMapper<MaterialGroup> {

@@ -5,7 +5,7 @@ import lombok.Getter;
 import static group.mytool.flutter.flex.backend.core.util.Constant.ERROR_MESSAGE;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 @Getter
 public enum EnumGlobalError {

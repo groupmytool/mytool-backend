@@ -3,7 +3,7 @@ package group.mytool.flutter.flex.backend.core.util;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 class HexUtilTest {
 

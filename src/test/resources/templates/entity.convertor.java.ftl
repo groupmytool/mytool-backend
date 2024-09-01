@@ -11,7 +11,7 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
 /**
  * ${table.comment!} 转换器
  *
- * @author MyTool <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 @Mapper(componentModel = SPRING)
 public interface ${entity}Convertor {

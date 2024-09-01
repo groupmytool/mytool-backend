@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 @Repository
 public class MaterialGroupDao extends ServiceImpl<MaterialGroupMapper, MaterialGroup> {

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
 * ${table.comment!} 控制层
 *
-* @author MyTool <0haizhu0@gmail.com>
+* @author 麦途 <0haizhu0@gmail.com>
 */
 @RestController
 @RequiredArgsConstructor

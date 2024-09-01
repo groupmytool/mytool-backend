@@ -8,7 +8,7 @@ import jakarta.validation.Validator;
 import java.util.Set;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 public class BaseValidateTest extends FlutterFlexBackendApplicationTests {
 

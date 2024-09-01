@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 /**
 * ${table.comment!} 数据持久层
 *
-* @author MyTool <0haizhu0@gmail.com>
+* @author 麦途 <0haizhu0@gmail.com>
 */
 @Repository
 @RequiredArgsConstructor

@@ -3,7 +3,7 @@ package group.mytool.flutter.flex.backend.core.entity;
 import lombok.Getter;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 @Getter
 public enum EnumModule {

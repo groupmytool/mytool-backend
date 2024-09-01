@@ -21,7 +21,7 @@ import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.L
 import static group.mytool.flutter.flex.backend.core.exception.EnumGlobalError.USER_NAME_EXIST;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 @Service
 @RequiredArgsConstructor

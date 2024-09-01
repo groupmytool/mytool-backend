@@ -22,7 +22,7 @@ import static group.mytool.flutter.flex.backend.common.user.controller.MemberCon
 import static group.mytool.flutter.flex.backend.common.user.controller.MemberControllerTest.USERNAME;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
 class MemberServiceTest extends FlutterFlexBackendApplicationTests {
 
