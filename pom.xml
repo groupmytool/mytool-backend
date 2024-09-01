@@ -9,10 +9,10 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>group.mytool</groupId>
-  <artifactId>flutter-flex-backend</artifactId>
+  <artifactId>mytool-backend</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>flutter-flex-backend</name>
-  <description>flutter-flex-backend</description>
+  <name>mytool-backend</name>
+  <description>mytool-backend</description>
   <properties>
     <java.version>21</java.version>
     <mybatis-plus-spring-boot3-starter.version>3.5.7</mybatis-plus-spring-boot3-starter.version>

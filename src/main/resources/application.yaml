@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: flutter-flex-backend
+    name: mytool-backend
   profiles:
     active: dev
 

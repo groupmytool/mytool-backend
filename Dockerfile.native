@@ -5,6 +5,6 @@ RUN ./mvnw -Pnative clean -DskipTests native:compile
 
 FROM bellsoft/alpaquita-linux-base:stream-glibc-240821
 WORKDIR /home/myapp
-COPY --from=builder /home/build/target/flutter-flex-backend .
+COPY --from=builder /home/build/target/mytool-backend .
 EXPOSE 8080
-CMD ["/bin/sh", "-c", "/home/myapp/flutter-flex-backend"]
+CMD ["/bin/sh", "-c", "/home/myapp/mytool-backend"]

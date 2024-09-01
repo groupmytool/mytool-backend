@@ -5,6 +5,6 @@ RUN ./mvnw clean package -DskipTests
 
 FROM bellsoft/liberica-runtime-container:jdk-21.0.4-crac-cds-slim-glibc
 WORKDIR /home/myapp
-COPY --from=builder /home/build/target/flutter-flex-backend.jar .
+COPY --from=builder /home/build/target/mytool-backend.jar .
 EXPOSE 8080
-CMD ["java", "-jar", "/home/myapp/flutter-flex-backend.jar"]
+CMD ["java", "-jar", "/home/myapp/mytool-backend.jar"]
