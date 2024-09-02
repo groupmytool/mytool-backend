@@ -130,7 +130,7 @@
         <configuration>
           <buildArgs combine.children="append">
             <buildArg>--enable-url-protocols=http</buildArg>
-            <buildArg>--features=group.mytool.flutter.flex.backend.core.config.MyPlusLambdaRegistrationFeature
+            <buildArg>--features=group.mytool.backend.core.config.MyPlusLambdaRegistrationFeature
             </buildArg>
           </buildArgs>
         </configuration>
