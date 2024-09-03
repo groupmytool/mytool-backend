@@ -1,5 +1,6 @@
 package group.mytool.backend.food.material.service;
 
+import group.mytool.backend.core.util.StringUtil;
 import group.mytool.backend.food.material.dao.MaterialDao;
 import group.mytool.backend.food.material.dao.MaterialGroupDao;
 import group.mytool.backend.food.material.entity.convertor.MaterialConvertor;
@@ -35,7 +36,14 @@ public class MaterialGroupService {
   private final MaterialDao materialDao;
 
   public Boolean save(MaterialGroup group) {
+    if (StringUtil.isEmpty(group.getParentId())) {
+      group.setParentId(NODE_ROOT);
+    }
     return dao.save(group);
+  }
+
+  public Boolean removeById(String id) {
+    return dao.removeById(id);
   }
 
   /**
@@ -57,15 +65,15 @@ public class MaterialGroupService {
    */
   public List<MaterialGroupChildVo> getChildMaterialGroup(String parentId) {
     List<MaterialGroup> groupList = dao.selectByParentId(parentId);
-    List<MaterialGroupChildVo> materialGroupTopVos = convertor.poToChildVoList(groupList);
-    if (materialGroupTopVos.isEmpty()) {
-      return materialGroupTopVos;
+    List<MaterialGroupChildVo> materialGroupChildVos = convertor.poToChildVoList(groupList);
+    if (materialGroupChildVos.isEmpty()) {
+      return materialGroupChildVos;
     }
-    List<String> groupIds = materialGroupTopVos.stream().map(MaterialGroupChildVo::getId).toList();
+    List<String> groupIds = materialGroupChildVos.stream().map(MaterialGroupChildVo::getId).toList();
     List<Material> allMaterials = materialDao.selectByGroupIds(groupIds);
     // 实现如下逻辑：materials按照groupId分组，返回Map<String, List<Material>>
     Map<String, List<Material>> tempMap = allMaterials.stream().collect(Collectors.groupingBy(Material::getGroupId));
-    for (MaterialGroupChildVo materialGroupChildVo : materialGroupTopVos) {
+    for (MaterialGroupChildVo materialGroupChildVo : materialGroupChildVos) {
       List<Material> groupMaterial = tempMap.get(materialGroupChildVo.getId());
       if (CollectionUtils.isEmpty(groupMaterial)) {
         continue;
@@ -73,8 +81,8 @@ public class MaterialGroupService {
       List<MaterialVo> materialVos = materialConvertor.doToVoList(groupMaterial);
       materialGroupChildVo.setMaterials(materialVos);
     }
-    materialGroupTopVos.sort(Comparator.comparingInt(MaterialGroupChildVo::getSort));
-    return materialGroupTopVos;
+    materialGroupChildVos.sort(Comparator.comparingInt(MaterialGroupChildVo::getSort));
+    return materialGroupChildVos;
   }
 
 }

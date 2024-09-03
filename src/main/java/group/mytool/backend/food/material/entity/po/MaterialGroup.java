@@ -18,7 +18,7 @@ public class MaterialGroup extends BaseEntity {
   @TableField("parent_id")
   private String parentId;
 
-  /** 名称 */
+  /** 分组名称 */
   @TableField("group_name")
   private String name;
 
