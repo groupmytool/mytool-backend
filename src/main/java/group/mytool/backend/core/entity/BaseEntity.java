@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @Data
 public class BaseEntity {
 
-  @TableId(value = "id", type = IdType.ASSIGN_ID)
+  @TableId(value = "id", type = IdType.ASSIGN_UUID)
   private String id;
 
   @TableField(value = "create_time", fill = FieldFill.INSERT)
