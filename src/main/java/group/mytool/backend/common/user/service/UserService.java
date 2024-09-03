@@ -24,8 +24,4 @@ public class UserService {
     return userDao.selectByUsername(username);
   }
 
-  public int deleteByUserNamePhysical(String username) {
-    return userDao.deleteByUsername(username);
-  }
-
 }

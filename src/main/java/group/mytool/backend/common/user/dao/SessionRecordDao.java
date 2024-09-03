@@ -2,9 +2,9 @@ package group.mytool.backend.common.user.dao;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import group.mytool.backend.common.user.entity.po.SessionRecord;
 import group.mytool.backend.common.user.mapper.SessionRecordMapper;
+import group.mytool.backend.core.dao.BaseDao;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @RequiredArgsConstructor
-public class SessionRecordDao extends ServiceImpl<SessionRecordMapper, SessionRecord> {
+public class SessionRecordDao extends BaseDao<SessionRecordMapper, SessionRecord> {
 
   private final SessionRecordMapper mapper;
 

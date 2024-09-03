@@ -1,7 +1,6 @@
 package group.mytool.backend.food.material.mapper;
 
-
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import group.mytool.backend.core.dao.MyBaseMapper;
 import group.mytool.backend.food.material.entity.po.MaterialGroup;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,5 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @author 麦途 <0haizhu0@gmail.com>
  */
 @Mapper
-public interface MaterialGroupMapper extends BaseMapper<MaterialGroup> {
+public interface MaterialGroupMapper extends MyBaseMapper<MaterialGroup> {
 }

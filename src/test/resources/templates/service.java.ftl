@@ -1,6 +1,6 @@
 package ${package.Service};
 
-import ${package.Mapper}.${table.mapperName};
+import ${package.Parent}.dao.${table.entityName}Dao;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ${table.entityName}Service {
 
-  private final ${table.mapperName} mapper;
+  private final ${table.entityName}Dao dao;
 
 }

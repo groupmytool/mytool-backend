@@ -2,7 +2,7 @@ package ${package.Entity}.po;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import entity.core.group.mytool.flutter.backend.BaseEntity;
+import group.mytool.backend.core.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
