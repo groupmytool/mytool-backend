@@ -1,14 +1,17 @@
 package group.mytool.backend.common.user.controller;
 
+import group.mytool.backend.common.user.client.MemberControllerInterface;
 import group.mytool.backend.common.user.entity.req.LoginParam;
 import group.mytool.backend.common.user.entity.req.RegisterParam;
 import group.mytool.backend.common.user.entity.vo.LoginTokenVo;
 import group.mytool.backend.common.user.service.MemberService;
 import group.mytool.backend.core.entity.Result;
+import group.mytool.backend.core.entity.vo.Val;
 import group.mytool.backend.core.exception.SystemException;
+import group.mytool.backend.core.util.validate.ValidationSequence;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,20 +28,20 @@ import static group.mytool.backend.core.util.Constant.USER_OBTAIN;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(MEMBER_CONTROLLER)
-public class MemberController {
+public class MemberController implements MemberControllerInterface {
 
   private final MemberService memberService;
 
-  @PostMapping("/register")
-  public Result<Boolean> register(@RequestBody @Valid RegisterParam registerParam) {
+  @Override
+  public Result<Val> register(@RequestBody @Validated(ValidationSequence.class) RegisterParam registerParam) {
     // 不允许注册保留账号
     if (USER_OBTAIN.contains(registerParam.getUsername())) {
       throw SystemException.build(USER_NAME_OBTAIN);
     }
-    return Result.ok(memberService.register(registerParam));
+    return Result.ok(Val.build(memberService.register(registerParam)));
   }
 
-  @PostMapping("/login")
+  @Override
   public Result<LoginTokenVo> login(@RequestBody @Valid LoginParam loginParam) {
     return Result.ok(memberService.login(loginParam));
   }

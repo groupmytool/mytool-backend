@@ -1,7 +1,7 @@
 package group.mytool.backend.common.user.service;
 
 import group.mytool.backend.common.user.dao.UserDao;
-import group.mytool.backend.common.user.entity.convertor.UserConvertor;
+import group.mytool.backend.common.user.entity.util.convertor.UserConvertor;
 import group.mytool.backend.common.user.entity.req.LoginParam;
 import group.mytool.backend.common.user.entity.req.RegisterParam;
 import group.mytool.backend.common.user.entity.po.User;

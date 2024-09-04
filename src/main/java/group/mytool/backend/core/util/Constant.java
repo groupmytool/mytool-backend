@@ -17,6 +17,10 @@ public class Constant {
   public static final String ERROR_MESSAGE = "系统内部错误，请联系管理员!";
   public static final Long TOKEN_EXPIRE_TIME = 365 * 24 * 60 * 60 * 1000L;
 
+  public static final String NORM_DATETIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
+  public static final String NORM_TIME_PATTERN = "HH:mm:ss";
+  public static final String NORM_DATE_PATTERN = "yyyy-MM-dd";
+
   /** 保留账号 */
   public static final List<String> USER_OBTAIN = Arrays.asList("admin", "mytool");
   /** token请求头名称 */

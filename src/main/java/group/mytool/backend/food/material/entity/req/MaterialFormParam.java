@@ -13,20 +13,29 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class MaterialFormParam extends Material {
 
-  @Size(min = 32, max = 32, message = "分组信息错误")
-  @NotNull(message = "分组不能为空")
+  public static final String groupIdNotNullMessage = "分组不能为空";
+  public static final String groupIdSizeMessage = "分组信息错误";
+  public static final String nameNotNullMessage = "名称不能为空";
+  public static final String nameSizeMessage = "名称过长";
+  public static final String unitNotNullMessage = "单位不能为空";
+  public static final String unitSizeMessage = "单位过长";
+  public static final String imageUrlNotNullMessage = "图片地址不能为空";
+  public static final String imageUrlSizeMessage = "图片地址过长";
+
+  @Size(min = 32, max = 32, message = groupIdSizeMessage)
+  @NotNull(message = groupIdNotNullMessage)
   private String groupId;
 
-  @Size(min = 1, max = 32, message = "名称过长")
-  @NotNull(message = "名称不能为空")
+  @Size(max = 20, message = nameSizeMessage)
+  @NotNull(message = nameNotNullMessage)
   private String name;
 
-  @Size(min = 1, max = 32, message = "单位过长")
-  @NotNull(message = "单位不能为空")
+  @Size(max = 10, message = unitSizeMessage)
+  @NotNull(message = unitNotNullMessage)
   private String unit;
 
-  @Size(min = 1, max = 255, message = "图片地址过长")
-  @NotNull(message = "图片地址不能为空")
+  @Size(max = 100, message = imageUrlSizeMessage)
+  @NotNull(message = imageUrlNotNullMessage)
   private String imageUrl;
 
 }

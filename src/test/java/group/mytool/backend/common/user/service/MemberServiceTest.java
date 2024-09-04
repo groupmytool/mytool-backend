@@ -2,7 +2,6 @@ package group.mytool.backend.common.user.service;
 
 import group.mytool.backend.FlutterFlexBackendApplicationTests;
 import group.mytool.backend.common.user.dao.UserDao;
-import group.mytool.backend.common.user.entity.po.User;
 import group.mytool.backend.common.user.entity.req.LoginParam;
 import group.mytool.backend.common.user.entity.req.RegisterParam;
 import group.mytool.backend.common.user.entity.vo.LoginTokenVo;
@@ -33,8 +32,6 @@ class MemberServiceTest extends FlutterFlexBackendApplicationTests {
   @Autowired
   private MemberService memberService;
   @Autowired
-  private UserService userService;
-  @Autowired
   private UserDao userDao;
 
   @Order(1)
@@ -44,11 +41,6 @@ class MemberServiceTest extends FlutterFlexBackendApplicationTests {
     registerParam.setUsername(USERNAME);
     registerParam.setPassword(PASSWORD);
 
-    User user = userService.queryByUserName(registerParam.getUsername());
-    if (Objects.nonNull(user)) {
-      int cnt = userDao.deleteByIdPhysical(user.getId());
-      Assertions.assertTrue(cnt > 0);
-    }
 
     boolean register = memberService.register(registerParam);
     Assertions.assertTrue(register);

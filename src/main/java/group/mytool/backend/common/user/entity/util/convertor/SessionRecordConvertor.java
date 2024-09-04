@@ -1,4 +1,4 @@
-package group.mytool.backend.common.user.entity.convertor;
+package group.mytool.backend.common.user.entity.util.convertor;
 
 import group.mytool.backend.common.user.entity.po.SessionRecord;
 import group.mytool.backend.common.user.entity.vo.LoginTokenVo;

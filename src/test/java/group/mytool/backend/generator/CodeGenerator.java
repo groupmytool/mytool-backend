@@ -14,7 +14,7 @@ import java.util.Arrays;
  */
 public class CodeGenerator {
 
-  public static final String APP_MODULE = "common";
+  public static final String APP_MODULE = "food";
   public static final String TABLE_NAME = "common_user";
 
   public static final String[] TABLE_PREFIX = {"common_", "food_"};

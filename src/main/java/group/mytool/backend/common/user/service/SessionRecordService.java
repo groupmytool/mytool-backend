@@ -1,7 +1,7 @@
 package group.mytool.backend.common.user.service;
 
 import group.mytool.backend.common.user.dao.SessionRecordDao;
-import group.mytool.backend.common.user.entity.convertor.SessionRecordConvertor;
+import group.mytool.backend.common.user.entity.util.convertor.SessionRecordConvertor;
 import group.mytool.backend.common.user.entity.po.SessionRecord;
 import group.mytool.backend.common.user.entity.vo.LoginTokenVo;
 import lombok.RequiredArgsConstructor;

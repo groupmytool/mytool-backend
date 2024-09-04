@@ -1,4 +1,4 @@
-package group.mytool.backend.core.util.validator;
+package group.mytool.backend.common.user.entity.util.validator;
 
 
 import jakarta.validation.ConstraintValidator;
@@ -9,7 +9,7 @@ import jakarta.validation.ConstraintValidatorContext;
  */
 public class UsernameValidator implements ConstraintValidator<ValidUsername, String> {
 
-  private static final String USERNAME_PATTERN = "^[a-z][a-z0-9]*$";
+  private static final String USERNAME_PATTERN = "^[a-zA-Z0-9]+$";
 
   @Override
   public boolean isValid(String username, ConstraintValidatorContext context) {

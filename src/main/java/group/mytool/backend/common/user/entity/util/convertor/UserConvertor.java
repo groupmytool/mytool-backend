@@ -1,4 +1,4 @@
-package group.mytool.backend.common.user.entity.convertor;
+package group.mytool.backend.common.user.entity.util.convertor;
 
 import group.mytool.backend.common.user.entity.req.RegisterParam;
 import group.mytool.backend.common.user.entity.po.User;

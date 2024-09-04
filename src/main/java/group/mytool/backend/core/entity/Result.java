@@ -4,9 +4,6 @@ import group.mytool.backend.core.exception.EnumGlobalError;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Collections;
-import java.util.Map;
-
 import static group.mytool.backend.core.exception.EnumGlobalError.SUCCESS;
 
 @Getter
@@ -31,15 +28,14 @@ public class Result<T> {
     return restRes;
   }
 
-  public static Result<Map<String, String>> error(EnumGlobalError error) {
+  public static  <T> Result<T> error(EnumGlobalError error) {
     return Result.error(error.getCode(), error.getMessage());
   }
 
-  public static Result<Map<String, String>> error(Integer code, String message) {
-    Result<Map<String, String>> restRes = new Result<>();
+  public static  <T> Result<T> error(Integer code, String message) {
+    Result<T> restRes = new Result<>();
     restRes.setCode(code);
     restRes.setMessage(message);
-    restRes.setData(Collections.emptyMap());
     return restRes;
   }
 

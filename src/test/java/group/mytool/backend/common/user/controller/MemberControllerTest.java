@@ -1,93 +1,123 @@
 package group.mytool.backend.common.user.controller;
 
 import group.mytool.backend.common.BaseValidateTest;
+import group.mytool.backend.common.user.client.MemberControllerClient;
+import group.mytool.backend.common.user.dao.UserDao;
+import group.mytool.backend.common.user.entity.po.User;
 import group.mytool.backend.common.user.entity.req.LoginParam;
 import group.mytool.backend.common.user.entity.req.RegisterParam;
+import group.mytool.backend.common.user.entity.util.validator.ValidPassword;
+import group.mytool.backend.common.user.entity.vo.LoginTokenVo;
+import group.mytool.backend.core.entity.Result;
+import group.mytool.backend.core.entity.vo.Val;
 import group.mytool.backend.core.util.IdUtil;
-import group.mytool.backend.core.util.validator.ValidPassword;
-import group.mytool.backend.core.util.validator.ValidUsername;
 import jakarta.validation.ConstraintViolation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 
+import java.util.Objects;
 import java.util.Set;
+
+import static group.mytool.backend.core.exception.EnumGlobalError.SUCCESS;
+import static group.mytool.backend.core.exception.EnumGlobalError.USER_NAME_OBTAIN;
+import static group.mytool.backend.core.util.Constant.USER_OBTAIN;
 
 /**
  * @author 麦途 <0haizhu0@gmail.com>
  */
-@SpringBootTest
+@Configuration
 public class MemberControllerTest extends BaseValidateTest {
 
-  public static final String USERNAME = "mytool";
-  public static final String PASSWORD = "MyTool@123";
+  public static final String USERNAME = "test";
+  public static final String PASSWORD = "Test!@#1234";
   public static final String CLIENT_ID = IdUtil.simpleUUID();
 
+  @Autowired
+  private MemberControllerClient memberControllerClient;
+  @Autowired
+  private UserDao userDao;
+
   @Test
-  void validateRegisterParam() {
+  void register() {
     RegisterParam registerParam = new RegisterParam();
-    // validate username
+    // 环境准备
+    registerParam.setUsername(USERNAME);
     registerParam.setPassword(PASSWORD);
+    User user = userDao.selectByUsername(registerParam.getUsername());
+    if (Objects.nonNull(user)) {
+      int cnt = userDao.deleteByIdPhysical(user.getId());
+      Assertions.assertTrue(cnt > 0);
+    }
     // - username is null
-    String message = this.validateMessage(registerParam);
-    Assertions.assertTrue(message.contains(RegisterParam.usernameNotNullMessage));
-    Assertions.assertTrue(message.contains(ValidUsername.defaultMessage));
+    registerParam.setUsername(null);
+    Result<Val> register = memberControllerClient.register(registerParam);
+    Assertions.assertEquals(RegisterParam.usernameNotNullMessage, register.getMessage());
+    // - username is obtained
+    registerParam.setUsername(USER_OBTAIN.getFirst());
+    register = memberControllerClient.register(registerParam);
+    Assertions.assertEquals(USER_NAME_OBTAIN.getMessage(), register.getMessage());
     // - username too short
     registerParam.setUsername("ts");
-    message = this.validateMessage(registerParam);
-    Assertions.assertTrue(message.contains(RegisterParam.usernameSizeMessage));
-    // - username not match pattern: not start with number
-    registerParam.setUsername("123test");
-    message = this.validateMessage(registerParam);
-    Assertions.assertTrue(message.contains(ValidUsername.defaultMessage));
-    // - username not match pattern: not start with upper case character
-    registerParam.setUsername("Test123");
-    message = this.validateMessage(registerParam);
-    Assertions.assertTrue(message.contains(ValidUsername.defaultMessage));
+    register = memberControllerClient.register(registerParam);
+    Assertions.assertEquals(RegisterParam.usernameSizeMessage, register.getMessage());
 
-    // validate username
+    // - password is null
     registerParam.setUsername(USERNAME);
     registerParam.setPassword(null);
-    // - password is null
-    message = this.validateMessage(registerParam);
-    Assertions.assertTrue(message.contains(RegisterParam.passwordNotNullMessage));
-    Assertions.assertTrue(message.contains(ValidPassword.defaultMessage));
+    register = memberControllerClient.register(registerParam);
+    Assertions.assertEquals(RegisterParam.passwordNotNullMessage, register.getMessage());
     // - password too short
     registerParam.setPassword("T");
-    message = this.validateMessage(registerParam);
-    Assertions.assertTrue(message.contains(RegisterParam.passwordSizeMessage));
+    register = memberControllerClient.register(registerParam);
+    Assertions.assertEquals(RegisterParam.passwordSizeMessage, register.getMessage());
     // - password not match pattern: not contain upper case character
     registerParam.setPassword("test1234");
-    message = this.validateMessage(registerParam);
-    Assertions.assertTrue(message.contains(ValidPassword.defaultMessage));
+    register = memberControllerClient.register(registerParam);
+    Assertions.assertEquals(ValidPassword.defaultMessage, register.getMessage());
     // - password not match pattern: not contain lower case character
     registerParam.setPassword("TEST1234");
-    message = this.validateMessage(registerParam);
-    Assertions.assertTrue(message.contains(ValidPassword.defaultMessage));
+    register = memberControllerClient.register(registerParam);
+    Assertions.assertEquals(ValidPassword.defaultMessage, register.getMessage());
     // - password not match pattern: not contain number
     registerParam.setPassword("TestTest");
-    message = this.validateMessage(registerParam);
-    Assertions.assertTrue(message.contains(ValidPassword.defaultMessage));
+    register = memberControllerClient.register(registerParam);
+    Assertions.assertEquals(ValidPassword.defaultMessage, register.getMessage());
     // - password match pattern: could contain special character
-    registerParam.setPassword("Test!@#1234");
-    Set<ConstraintViolation<RegisterParam>> violations = this.validate(registerParam);
-    Assertions.assertTrue(violations.isEmpty());
-
-    // validate success
-    registerParam.setUsername(USERNAME);
     registerParam.setPassword(PASSWORD);
-    violations = this.validate(registerParam);
+    Set<ConstraintViolation<RegisterParam>> violations = validate(registerParam);
     Assertions.assertTrue(violations.isEmpty());
-
+    register = memberControllerClient.register(registerParam);
+    Assertions.assertEquals(SUCCESS.getCode(), register.getCode());
   }
 
   @Test
-  void validateLoginParam() {
+  void login() {
+    // 参数准备
     LoginParam loginParam = new LoginParam();
-    String message = this.validateMessage(loginParam);
-    Assertions.assertTrue(message.contains(LoginParam.clientIdNotNullMessage));
-    Assertions.assertTrue(message.contains(LoginParam.usernameNotNullMessage));
-    Assertions.assertTrue(message.contains(LoginParam.passwordNotNullMessage));
+    loginParam.setClientId(IdUtil.simpleUUID());
+    loginParam.setUsername(USERNAME);
+    loginParam.setPassword(PASSWORD);
+    // username is null
+    loginParam.setUsername(null);
+    Result<LoginTokenVo> result = memberControllerClient.login(loginParam);
+    Assertions.assertEquals(LoginParam.usernameNotNullMessage, result.getMessage());
+    loginParam.setUsername(USERNAME);
+    // password is null
+    loginParam.setPassword(null);
+    result = memberControllerClient.login(loginParam);
+    Assertions.assertEquals(LoginParam.passwordNotNullMessage, result.getMessage());
+    loginParam.setPassword(PASSWORD);
+    // clientId is null
+    loginParam.setClientId(null);
+    result = memberControllerClient.login(loginParam);
+    Assertions.assertEquals(LoginParam.clientIdNotNullMessage, result.getMessage());
+    loginParam.setClientId(IdUtil.simpleUUID());
+    Set<ConstraintViolation<LoginParam>> violations = validate(loginParam);
+    Assertions.assertTrue(violations.isEmpty());
+    result = memberControllerClient.login(loginParam);
+    Assertions.assertEquals(SUCCESS.getCode(), result.getCode());
   }
 
 

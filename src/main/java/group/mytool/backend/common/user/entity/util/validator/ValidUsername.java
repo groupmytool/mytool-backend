@@ -1,4 +1,4 @@
-package group.mytool.backend.core.util.validator;
+package group.mytool.backend.common.user.entity.util.validator;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidUsername {
 
-  String defaultMessage = "用户名不合法：须小写字母，可包含数字";
+  String defaultMessage = "用户名不能包含特殊字符";
 
   String message() default defaultMessage;
 
