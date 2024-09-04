@@ -6,6 +6,11 @@ import com.baomidou.mybatisplus.core.metadata.TableInfo;
 
 import java.util.List;
 
+/**
+ * 扩展公共模版方法
+ *
+ * @author 麦途 <0haizhu0@gmail.com>
+ */
 public class CustomSqlInjector extends DefaultSqlInjector {
 
   private static final String DELETE_BY_ID_PHYSICAL = "deleteByIdPhysical";
