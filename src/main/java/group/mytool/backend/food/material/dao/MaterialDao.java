@@ -15,6 +15,12 @@ import java.util.List;
 @Repository
 public class MaterialDao extends BaseDao<MaterialMapper, Material> {
 
+  public List<Material> selectByGroupId(String groupId) {
+    LambdaQueryWrapper<Material> queryWrapper = Wrappers.<Material>lambdaQuery()
+        .eq(Material::getGroupId, groupId);
+    return baseMapper.selectList(queryWrapper);
+  }
+
   public List<Material> selectByGroupIds(List<String> groupIds) {
     LambdaQueryWrapper<Material> queryWrapper = Wrappers.<Material>lambdaQuery()
         .in(Material::getGroupId, groupIds);

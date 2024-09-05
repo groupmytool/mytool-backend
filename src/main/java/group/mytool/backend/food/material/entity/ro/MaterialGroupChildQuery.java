@@ -7,10 +7,12 @@ import lombok.Data;
  * @author 麦途 <0haizhu0@gmail.com>
  */
 @Data
-public class ChildMaterialGroupQuery {
+public class MaterialGroupChildQuery {
+
+  public static final String parentIdNotNullMessage = "父节点分组ID不能为空";
 
   /** 父节点分组ID */
-  @NotNull(message = "父节点分组ID不能为空")
+  @NotNull(message = parentIdNotNullMessage)
   private String parentId;
 
 }

@@ -3,13 +3,15 @@ package group.mytool.backend.food.material.controller;
 import group.mytool.backend.core.entity.Result;
 import group.mytool.backend.core.entity.ro.IdQuery;
 import group.mytool.backend.core.entity.vo.Val;
-import group.mytool.backend.food.material.client.AdminControllerInterface;
+import group.mytool.backend.core.util.validate.ValidationSequence;
+import group.mytool.backend.food.material.client.AdminMaterialControllerInterface;
 import group.mytool.backend.food.material.entity.ro.MaterialFormParam;
 import group.mytool.backend.food.material.entity.ro.MaterialGroupFormParam;
 import group.mytool.backend.food.material.service.MaterialGroupService;
 import group.mytool.backend.food.material.service.MaterialService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,8 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin/material")
-public class AdminController implements AdminControllerInterface {
+@RequestMapping(AdminMaterialController.ADMIN_MATERIAL_CONTROLLER)
+public class AdminMaterialController implements AdminMaterialControllerInterface {
+
+  public static final String ADMIN_MATERIAL_CONTROLLER = "/admin/material";
 
   private final MaterialGroupService groupService;
   private final MaterialService service;
@@ -36,7 +40,7 @@ public class AdminController implements AdminControllerInterface {
   }
 
   @Override
-  public Result<Val> groupSaveOrUpdate(@RequestBody @Valid MaterialGroupFormParam form) {
+  public Result<Val> groupSaveOrUpdate(@RequestBody @Validated(ValidationSequence.class) MaterialGroupFormParam form) {
     return Result.ok(groupService.saveOrUpdate(form));
   }
 

@@ -7,7 +7,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients(basePackages = "group.mytool.backend.*.*.client")
 public class FlutterFlexBackendApplicationTests {
 
-  public static final String TEST_SERVICE = "mytool";
-  public static final String TEST_URL = "http://localhost:8080";
+  public static final String TEST_URL = "http://127.0.0.1:8080";
 
 }

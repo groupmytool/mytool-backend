@@ -25,14 +25,15 @@ public enum EnumGlobalError {
   AUTH_NO_AUTHORIZATION(203, "无操作权限，请联系管理员！", "禁止跨权限调用！"),
 
   // 参数：301~399
-  PARAM_ILLEGAL(301, "请求参数错误，请确认后重试！", ""),
+  PARAM_ILLEGAL(301, "请求参数错误，请确认后重试！", "请求参数错误，请确认后重试！"),
+  USED_CANNOT_DELETE(302, "已被使用，无法删除！", "已被使用，无法删除！"),
+  DATA_EXIST(303, "已经存在，不能重复添加！", "已经存在，不能重复添加！"),
   UPLOAD_FILE_ERROR(320, "文件上传出错！", "文件上传出错！"),
 
   // 用户：901~999
   USER_NAME_OBTAIN(901, "不能注册保留账号！", "不能注册保留账号！"),
   USER_NAME_EXIST(902, "用户名已存在！", "用户名已存在"),
   NIKE_NAME_EXIST(903, "昵称已存在！", "昵称已存在"),
-  LOGIN_ACCOUNT_ERROR(910, "账号或密码错误！", "账号或密码错误"),
 
   // 食途：1100~1199
   MATERIAL_GROUP_DATA_ERROR(1100, "食材分类数据异常", "食材分类数据异常"),

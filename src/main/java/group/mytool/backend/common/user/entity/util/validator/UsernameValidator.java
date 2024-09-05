@@ -1,6 +1,5 @@
 package group.mytool.backend.common.user.entity.util.validator;
 
-
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

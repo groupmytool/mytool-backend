@@ -30,7 +30,7 @@ public class MyPlusMetaObjectHandler implements MetaObjectHandler {
   @Override
   public void updateFill(MetaObject metaObject) {
     log.info("进入updateFill填充CCUU信息");
-    setFieldValByName("update_time", LocalDateTime.now(), metaObject);
+    setFieldValByName("updateTime", LocalDateTime.now(), metaObject);
     setFieldValByName("operateInfo", "{\"createUser\":\"admin\",\"updateUser\":\"admin\"}", metaObject);
   }
 

@@ -47,6 +47,7 @@ import org.apache.ibatis.reflection.TypeParameterResolver;
 import org.apache.ibatis.scripting.defaults.RawLanguageDriver;
 import org.apache.ibatis.scripting.xmltags.XMLLanguageDriver;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.type.SimpleTypeRegistry;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
@@ -90,7 +91,7 @@ import java.util.stream.Stream;
 /**
  * This configuration will move to mybatis-spring-native.
  */
-@Configuration(proxyBeanMethods = false)
+@Configuration
 @ImportRuntimeHints(MyPlusNativeConfiguration.MyBaitsRuntimeHintsRegistrar.class)
 public class MyPlusNativeConfiguration {
 
@@ -159,15 +160,9 @@ public class MyPlusNativeConfiguration {
           LambdaQueryWrapper.class,
           LambdaUpdateWrapper.class,
           UpdateWrapper.class,
-          QueryWrapper.class
+          QueryWrapper.class,
+          SimpleTypeRegistry.class
       ).forEach(clazz -> hints.reflection().registerType(clazz, MemberCategory.values()));
-
-      Stream.of(
-          BoundSql.class,
-          RoutingStatementHandler.class,
-          BaseStatementHandler.class,
-          MybatisParameterHandler.class
-      ).forEach(clazz -> hints.reflection().registerType(clazz, MemberCategory.DECLARED_FIELDS));
 
       Stream.of(
           BoundSql.class,

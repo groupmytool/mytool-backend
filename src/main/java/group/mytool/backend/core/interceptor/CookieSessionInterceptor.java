@@ -7,6 +7,7 @@ import group.mytool.backend.core.util.SessionUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -20,6 +21,9 @@ import static group.mytool.backend.core.exception.EnumGlobalError.AUTH_ILLEGAL_T
 public class CookieSessionInterceptor implements HandlerInterceptor {
 
   private final SessionRecordService sessionRecordService;
+
+  @Value("${mytool.session.freshTime:false}")
+  private boolean freshTime;
 
   public CookieSessionInterceptor(SessionRecordService sessionRecordService) {
     this.sessionRecordService = sessionRecordService;
@@ -43,10 +47,12 @@ public class CookieSessionInterceptor implements HandlerInterceptor {
       throw SystemException.build(AUTH_ILLEGAL_TOKEN);
     }
     // 更新最近访问时间
-    SessionRecord freshSession = new SessionRecord();
-    freshSession.setId(token);
-    freshSession.setFreshTime(LocalDateTime.now());
-    sessionRecordService.updateFreshTimeById(freshSession);
+    if (freshTime) {
+      SessionRecord freshSession = new SessionRecord();
+      freshSession.setId(token);
+      freshSession.setFreshTime(LocalDateTime.now());
+      sessionRecordService.updateFreshTimeById(freshSession);
+    }
     return true;
   }
 

@@ -1,10 +1,10 @@
 package group.mytool.backend.common.user.service;
 
 import group.mytool.backend.common.user.dao.UserDao;
-import group.mytool.backend.common.user.entity.util.convertor.UserConvertor;
+import group.mytool.backend.common.user.entity.po.User;
 import group.mytool.backend.common.user.entity.ro.LoginParam;
 import group.mytool.backend.common.user.entity.ro.RegisterParam;
-import group.mytool.backend.common.user.entity.po.User;
+import group.mytool.backend.common.user.entity.util.convertor.UserConvertor;
 import group.mytool.backend.common.user.entity.vo.LoginTokenVo;
 import group.mytool.backend.core.exception.SystemException;
 import group.mytool.backend.core.util.IdUtil;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.io.Serializable;
 import java.util.Objects;
 
-import static group.mytool.backend.core.exception.EnumGlobalError.LOGIN_ACCOUNT_ERROR;
+import static group.mytool.backend.core.exception.EnumGlobalError.AUTH_ILLEGAL_CERTIFICATE;
 import static group.mytool.backend.core.exception.EnumGlobalError.USER_NAME_EXIST;
 
 /**
@@ -71,15 +71,14 @@ public class MemberService implements Serializable {
     User user = userDao.selectByUsername(loginParam.getUsername());
     if (Objects.isNull(user)) {
       // 用户不存在
-      throw SystemException.build(LOGIN_ACCOUNT_ERROR);
+      throw SystemException.build(AUTH_ILLEGAL_CERTIFICATE);
     }
     String md5Hex = Md5Util.md5(loginParam.getPassword() + user.getPswdSalt());
     if (!md5Hex.equals(user.getPassword())) {
-      throw SystemException.build(LOGIN_ACCOUNT_ERROR);
+      throw SystemException.build(AUTH_ILLEGAL_CERTIFICATE);
     }
     // 生成token
     LoginTokenVo loginToken = sessionRecordService.createLoginToken(loginParam.getClientId(), user.getId());
-    logger.debug("{} login success: {}", user.getUsername(), loginToken);
     return loginToken;
   }
 

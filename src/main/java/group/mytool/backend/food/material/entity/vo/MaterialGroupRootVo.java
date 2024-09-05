@@ -6,7 +6,7 @@ import lombok.Data;
  * @author 麦途 <0haizhu0@gmail.com>
  */
 @Data
-public class MaterialGroupTopVo {
+public class MaterialGroupRootVo {
 
   /** ID */
   private String id;

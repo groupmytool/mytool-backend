@@ -15,7 +15,6 @@ import jakarta.validation.ConstraintViolation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.Objects;
 import java.util.Set;
@@ -27,12 +26,11 @@ import static group.mytool.backend.core.util.Constant.USER_OBTAIN;
 /**
  * @author 麦途 <0haizhu0@gmail.com>
  */
-@Configuration
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 public class MemberControllerTest extends BaseValidateTest {
 
   public static final String USERNAME = "test";
   public static final String PASSWORD = "Test!@#1234";
-  public static final String CLIENT_ID = IdUtil.simpleUUID();
 
   @Autowired
   private MemberControllerClient memberControllerClient;
@@ -44,12 +42,12 @@ public class MemberControllerTest extends BaseValidateTest {
     RegisterParam registerParam = new RegisterParam();
     // 环境准备
     registerParam.setUsername(USERNAME);
-    registerParam.setPassword(PASSWORD);
     User user = userDao.selectByUsername(registerParam.getUsername());
     if (Objects.nonNull(user)) {
       int cnt = userDao.deleteByIdPhysical(user.getId());
       Assertions.assertTrue(cnt > 0);
     }
+    registerParam.setPassword(PASSWORD);
     // - username is null
     registerParam.setUsername(null);
     Result<Val> register = memberControllerClient.register(registerParam);

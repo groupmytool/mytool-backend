@@ -46,6 +46,19 @@ public class GlobalExceptionHandler {
     return Result.error(PARAM_ILLEGAL.getCode(), message);
   }
 
+  /**
+   * for ${@link org.springframework.util.Assert#notNull(Object, String)} and so on.
+   *
+   * @param ex Assert 断言异常
+   * @return Result
+   */
+  @ExceptionHandler(IllegalArgumentException.class)
+  @ResponseStatus(HttpStatus.OK)
+  public Result<Map<String, String>> exceptionHandler(IllegalArgumentException ex) {
+    logger.debug("IllegalArgumentException: ", ex);
+    return Result.error(PARAM_ILLEGAL);
+  }
+
   @ExceptionHandler(Exception.class)
   @ResponseStatus(HttpStatus.OK)
   public Result<Map<String, String>> exceptionHandler(Exception ex) {

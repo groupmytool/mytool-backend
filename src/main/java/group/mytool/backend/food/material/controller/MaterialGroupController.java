@@ -2,9 +2,9 @@ package group.mytool.backend.food.material.controller;
 
 import group.mytool.backend.core.entity.Result;
 import group.mytool.backend.food.material.client.MaterialGroupControllerInterface;
-import group.mytool.backend.food.material.entity.ro.ChildMaterialGroupQuery;
+import group.mytool.backend.food.material.entity.ro.MaterialGroupChildQuery;
 import group.mytool.backend.food.material.entity.vo.MaterialGroupChildVo;
-import group.mytool.backend.food.material.entity.vo.MaterialGroupTopVo;
+import group.mytool.backend.food.material.entity.vo.MaterialGroupRootVo;
 import group.mytool.backend.food.material.service.MaterialGroupService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,19 +19,21 @@ import java.util.List;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/materialGroup")
+@RequestMapping(MaterialGroupController.MATERIAL_GROUP_CONTROLLER)
 public class MaterialGroupController implements MaterialGroupControllerInterface {
+
+  public static final String MATERIAL_GROUP_CONTROLLER = "/materialGroup";
 
   private final MaterialGroupService groupService;
 
   @Override
-  public Result<List<MaterialGroupTopVo>> getRootMaterialGroup() {
+  public Result<List<MaterialGroupRootVo>> getRootMaterialGroup() {
     return Result.ok(groupService.getRootMaterialGroup());
   }
 
   @Override
-  public Result<List<MaterialGroupChildVo>> getChildMaterialGroup(@RequestBody @Valid ChildMaterialGroupQuery query) {
-    return Result.ok(groupService.getChildMaterialGroup(query.getParentId()));
+  public Result<List<MaterialGroupChildVo>> getChildMaterialGroup(@RequestBody @Valid MaterialGroupChildQuery query) {
+    return Result.ok(groupService.getChildMaterialGroup(query));
   }
 
 

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- * @author adolphor <0haizhu0@gmail.com>
+ * @author 麦途 <0haizhu0@gmail.com>
  */
-public interface AdminControllerInterface {
+public interface AdminMaterialControllerInterface {
 
   @PostMapping("/save")
   Result<Val> saveOrUpdate(@RequestBody MaterialFormParam form);
