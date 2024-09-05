@@ -38,7 +38,7 @@ public class MemberController implements MemberControllerInterface {
     if (USER_OBTAIN.contains(registerParam.getUsername())) {
       throw SystemException.build(USER_NAME_OBTAIN);
     }
-    return Result.ok(Val.build(service.register(registerParam)));
+    return Result.ok(service.register(registerParam));
   }
 
   @Override

@@ -27,22 +27,22 @@ public class AdminController implements AdminControllerInterface {
 
   @Override
   public Result<Val> saveOrUpdate(@RequestBody @Valid MaterialFormParam form) {
-    return Result.ok(Val.build(service.saveOrUpdate(form)));
+    return Result.ok(service.saveOrUpdate(form));
   }
 
   @Override
   public Result<Val> removeById(@RequestBody @Valid IdQuery idQuery) {
-    return Result.ok(Val.build(service.removeById(idQuery.getId())));
+    return Result.ok(service.removeById(idQuery.getId()));
   }
 
   @Override
   public Result<Val> groupSaveOrUpdate(@RequestBody @Valid MaterialGroupFormParam form) {
-    return Result.ok(Val.build(groupService.saveOrUpdate(form)));
+    return Result.ok(groupService.saveOrUpdate(form));
   }
 
   @Override
   public Result<Val> groupRemoveById(@RequestBody @Valid IdQuery idQuery) {
-    return Result.ok(Val.build(groupService.removeById(idQuery.getId())));
+    return Result.ok(groupService.removeById(idQuery.getId()));
   }
 
 }

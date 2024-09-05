@@ -1,5 +1,6 @@
 package group.mytool.backend.core.entity;
 
+import group.mytool.backend.core.entity.vo.Val;
 import group.mytool.backend.core.exception.EnumGlobalError;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +26,24 @@ public class Result<T> {
   public static <T> Result<T> ok(T data) {
     Result<T> restRes = new Result<>(SUCCESS);
     restRes.setData(data);
+    return restRes;
+  }
+
+  public static Result<Val> ok(Boolean data) {
+    Result<Val> restRes = new Result<>(SUCCESS);
+    restRes.setData(Val.build(data));
+    return restRes;
+  }
+
+  public static Result<Val> ok(Integer data) {
+    Result<Val> restRes = new Result<>(SUCCESS);
+    restRes.setData(Val.build(data));
+    return restRes;
+  }
+
+  public static Result<Val> ok(String data) {
+    Result<Val> restRes = new Result<>(SUCCESS);
+    restRes.setData(Val.build(data));
     return restRes;
   }
 
