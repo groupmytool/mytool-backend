@@ -9,6 +9,28 @@ import java.io.File;
 import java.sql.Types;
 import java.util.Arrays;
 
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.clientName;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.clientPackage;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.controllerName;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.controllerPackage;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.convertorName;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.convertorPackage;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.daoName;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.daoPackage;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.dotJava;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.dotXml;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.mapperName;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.mapperPackage;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.paramName;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.poName;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.poPackage;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.queryName;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.roPackage;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.serviceName;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.servicePackage;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.voName;
+import static group.mytool.backend.generator.EnhanceFreemarkerTemplateEngine.voPackage;
+
 /**
  * @author 麦途 <0haizhu0@gmail.com>
  */
@@ -30,16 +52,17 @@ public class CodeGenerator {
   public static void main(String[] args) {
 
     // 使用lambda表达式将 TABLE_NAME 去掉 TABLE_PREFIX 中包含的前缀
-    CustomFile entityPo = getCustomFile(".java", "entity.po", "/templates/entity.po.java.ftl");
-    CustomFile entityVo = getCustomFile("Vo.java", "entity.vo", "/templates/entity.vo.java.ftl");
-    CustomFile entityQuery = getCustomFile("Query.java", "entity.req", "/templates/entity.query.java.ftl");
-    CustomFile entityForm = getCustomFile("FormParam.java", "entity.req", "/templates/entity.form.java.ftl");
-    CustomFile entityConvertor = getCustomFile("Convertor.java", "entity.convertor", "/templates/entity.convertor.java.ftl");
-    CustomFile mapper = getCustomFile("Mapper.java", "mapper", "/templates/mapper.java.ftl");
-    CustomFile mapperXml = getCustomFile("Mapper.xml", "mapper", "/templates/mapper.xml.ftl");
-    CustomFile dao = getCustomFile("Dao.java", "dao", "/templates/dao.java.ftl");
-    CustomFile service = getCustomFile("Service.java", "service", "/templates/service.java.ftl");
-    CustomFile controller = getCustomFile("Controller.java", "controller", "/templates/controller.java.ftl");
+    CustomFile entityPo = getCustomFile(poName + dotJava, poPackage, "/templates/entity.po.java.ftl");
+    CustomFile entityVo = getCustomFile(voName + dotJava, voPackage, "/templates/entity.vo.java.ftl");
+    CustomFile entityQuery = getCustomFile(queryName + dotJava, roPackage, "/templates/entity.query.java.ftl");
+    CustomFile entityForm = getCustomFile(paramName + dotJava, roPackage, "/templates/entity.param.java.ftl");
+    CustomFile entityConvertor = getCustomFile(convertorName + dotJava, convertorPackage, "/templates/entity.convertor.java.ftl");
+    CustomFile mapper = getCustomFile(mapperName + dotJava, mapperPackage, "/templates/mapper.java.ftl");
+    CustomFile mapperXml = getCustomFile(mapperName + dotXml, mapperPackage, "/templates/mapper.xml.ftl");
+    CustomFile dao = getCustomFile(daoName + dotJava, daoPackage, "/templates/dao.java.ftl");
+    CustomFile service = getCustomFile(serviceName + dotJava, servicePackage, "/templates/service.java.ftl");
+    CustomFile client = getCustomFile(clientName + dotJava, clientPackage, "/templates/client.java.ftl");
+    CustomFile controller = getCustomFile(controllerName + dotJava, controllerPackage, "/templates/controller.java.ftl");
 
     FastAutoGenerator.create(JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD)
         .globalConfig(builder -> {
@@ -79,6 +102,7 @@ public class CodeGenerator {
           consumer.customFile(mapperXml);
           consumer.customFile(dao);
           consumer.customFile(service);
+          consumer.customFile(client);
           consumer.customFile(controller);
         })
         .packageConfig(builder ->

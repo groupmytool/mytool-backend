@@ -25,6 +25,14 @@ docker run --name mytool-backend-native -d -p 8080:8080 --restart unless-stopped
 ## MyBatis-Plus
 * 为了避免 MyBatis-Plus 的 **`Wrapper`** 侵入 Service，增加了 **`Dao层`** 封装所有plus方法
 
+## 模版方法扩展
+* 扩展通用的物理删除模版方法：
+  * **`deleteByIdPhysical`** 
+  * **`deleteByIdsPhysical`**
+
+## 方法命名
+* 使用 Mybatis-Plus 的命名方式进行命名，保持命名规则统一
+
 ## entity设计
 * **`ro（request object）`**：特定dto，请求接口的参数对象，继承 **`po`**
   * **`Query`**：查询参数

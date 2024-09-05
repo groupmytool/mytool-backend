@@ -1,4 +1,4 @@
-package ${package.Entity}.po;
+package ${package.Po};
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;

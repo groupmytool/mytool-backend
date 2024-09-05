@@ -35,11 +35,11 @@ public class MaterialGroupService {
   private final MaterialGroupDao dao;
   private final MaterialDao materialDao;
 
-  public Boolean save(MaterialGroup group) {
-    if (StringUtil.isEmpty(group.getParentId())) {
+  public Boolean saveOrUpdate(MaterialGroup group) {
+    if (StringUtil.isEmpty(group.getId()) && StringUtil.isEmpty(group.getParentId())) {
       group.setParentId(NODE_ROOT);
     }
-    return dao.save(group);
+    return dao.saveOrUpdate(group);
   }
 
   public Boolean removeById(String id) {

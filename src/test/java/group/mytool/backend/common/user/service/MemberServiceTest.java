@@ -2,8 +2,8 @@ package group.mytool.backend.common.user.service;
 
 import group.mytool.backend.FlutterFlexBackendApplicationTests;
 import group.mytool.backend.common.user.dao.UserDao;
-import group.mytool.backend.common.user.entity.req.LoginParam;
-import group.mytool.backend.common.user.entity.req.RegisterParam;
+import group.mytool.backend.common.user.entity.ro.LoginParam;
+import group.mytool.backend.common.user.entity.ro.RegisterParam;
 import group.mytool.backend.common.user.entity.vo.LoginTokenVo;
 import group.mytool.backend.core.exception.EnumGlobalError;
 import group.mytool.backend.core.exception.SystemException;

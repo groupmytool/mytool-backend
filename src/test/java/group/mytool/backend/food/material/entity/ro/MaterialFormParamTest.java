@@ -1,4 +1,4 @@
-package group.mytool.backend.food.material.entity.req;
+package group.mytool.backend.food.material.entity.ro;
 
 import group.mytool.backend.common.BaseValidateTest;
 import group.mytool.backend.core.util.IdUtil;

@@ -1,6 +1,6 @@
-package ${package.Entity}.req;
+package ${package.Ro};
 
-import ${package.Entity}.po.${table.entityName};
+import ${package.Po}.${table.entityName};
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -11,5 +11,5 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class ${entity}Query extends ${table.entityName} {
+public class ${tableExt.queryName} extends ${table.entityName} {
 }

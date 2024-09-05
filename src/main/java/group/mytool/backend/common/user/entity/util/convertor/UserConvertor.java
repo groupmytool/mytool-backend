@@ -1,6 +1,6 @@
 package group.mytool.backend.common.user.entity.util.convertor;
 
-import group.mytool.backend.common.user.entity.req.RegisterParam;
+import group.mytool.backend.common.user.entity.ro.RegisterParam;
 import group.mytool.backend.common.user.entity.po.User;
 import org.mapstruct.Mapper;
 

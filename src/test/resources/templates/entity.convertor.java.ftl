@@ -1,7 +1,7 @@
-package ${package.Entity}.convertor;
+package ${package.Convertor};
 
-import ${package.Entity}.po.${entity};
-import ${package.Entity}.vo.${entity}Vo;
+import ${package.Po}.${table.entityName};
+import ${package.Vo}.${tableExt.voName};
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -14,10 +14,10 @@ import static org.mapstruct.MappingConstants.ComponentModel.SPRING;
  * @author 麦途 <0haizhu0@gmail.com>
  */
 @Mapper(componentModel = SPRING)
-public interface ${entity}Convertor {
+public interface ${tableExt.convertorName} {
 
-  ${entity}Vo poToVo(${entity} po);
+  ${tableExt.voName} poToVo(${table.entityName} po);
 
-  List<${entity}Vo> poToVoList(List<${entity}> poList);
+  List<${tableExt.voName}> poToVoList(List<${table.entityName}> poList);
 
 }

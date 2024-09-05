@@ -1,4 +1,4 @@
-package ${package.Entity}.vo;
+package ${package.Vo};
 
 import lombok.Data;
 
@@ -8,5 +8,5 @@ import lombok.Data;
  * @author 麦途 <0haizhu0@gmail.com>
  */
 @Data
-public class ${table.entityName}Vo {
+public class ${tableExt.voName} {
 }

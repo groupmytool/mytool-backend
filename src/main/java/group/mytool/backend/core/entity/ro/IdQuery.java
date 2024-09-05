@@ -1,4 +1,4 @@
-package group.mytool.backend.core.entity.req;
+package group.mytool.backend.core.entity.ro;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;

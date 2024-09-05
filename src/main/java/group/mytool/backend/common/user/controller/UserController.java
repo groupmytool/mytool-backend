@@ -1,5 +1,6 @@
 package group.mytool.backend.common.user.controller;
 
+import group.mytool.backend.common.user.client.UserControllerInterface;
 import group.mytool.backend.common.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/user")
-public class UserController {
+public class UserController implements UserControllerInterface {
 
-  private final UserService userService;
+  private final UserService service;
 
 }

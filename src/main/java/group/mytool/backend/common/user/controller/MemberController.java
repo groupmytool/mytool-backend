@@ -1,8 +1,8 @@
 package group.mytool.backend.common.user.controller;
 
 import group.mytool.backend.common.user.client.MemberControllerInterface;
-import group.mytool.backend.common.user.entity.req.LoginParam;
-import group.mytool.backend.common.user.entity.req.RegisterParam;
+import group.mytool.backend.common.user.entity.ro.LoginParam;
+import group.mytool.backend.common.user.entity.ro.RegisterParam;
 import group.mytool.backend.common.user.entity.vo.LoginTokenVo;
 import group.mytool.backend.common.user.service.MemberService;
 import group.mytool.backend.core.entity.Result;
@@ -30,7 +30,7 @@ import static group.mytool.backend.core.util.Constant.USER_OBTAIN;
 @RequestMapping(MEMBER_CONTROLLER)
 public class MemberController implements MemberControllerInterface {
 
-  private final MemberService memberService;
+  private final MemberService service;
 
   @Override
   public Result<Val> register(@RequestBody @Validated(ValidationSequence.class) RegisterParam registerParam) {
@@ -38,12 +38,12 @@ public class MemberController implements MemberControllerInterface {
     if (USER_OBTAIN.contains(registerParam.getUsername())) {
       throw SystemException.build(USER_NAME_OBTAIN);
     }
-    return Result.ok(Val.build(memberService.register(registerParam)));
+    return Result.ok(Val.build(service.register(registerParam)));
   }
 
   @Override
   public Result<LoginTokenVo> login(@RequestBody @Valid LoginParam loginParam) {
-    return Result.ok(memberService.login(loginParam));
+    return Result.ok(service.login(loginParam));
   }
 
 }

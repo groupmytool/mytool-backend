@@ -1,6 +1,6 @@
 package ${package.Mapper};
 
-import ${package.Entity}.po.${table.entityName};
+import ${package.Po}.${table.entityName};
 import group.mytool.backend.core.dao.MyBaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

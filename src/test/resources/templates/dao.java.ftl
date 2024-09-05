@@ -1,7 +1,7 @@
-package ${package.Parent}.dao;
+package ${package.Dao};
 
 import group.mytool.backend.core.dao.BaseDao;
-import ${package.Entity}.po.${table.entityName};
+import ${package.Po}.${table.entityName};
 import ${package.Mapper}.${table.mapperName};
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @RequiredArgsConstructor
-public class ${entity}Dao extends BaseDao<${table.mapperName}, ${table.entityName}> {
+public class ${tableExt.daoName} extends BaseDao<${table.mapperName}, ${table.entityName}> {
 
   private final ${table.mapperName} mapper;
 

@@ -4,7 +4,7 @@
 
 <#if baseResultMap>
     <!-- 通用查询映射结果 -->
-    <resultMap id="${table.entityName}Map" type="${package.Entity}.${table.entityName}">
+    <resultMap id="${table.entityName}Map" type="${package.Po}.${table.entityName}">
     <#list table.fields as field>
         <#if field.keyFlag><#--生成主键排在第一位-->
             <id column="${field.name}" property="${field.propertyName}"/>

@@ -1,4 +1,4 @@
-package group.mytool.backend.common.user.entity.req;
+package group.mytool.backend.common.user.entity.ro;
 
 import group.mytool.backend.common.user.entity.util.validator.ValidPassword;
 import group.mytool.backend.common.user.entity.util.validator.ValidUsername;
