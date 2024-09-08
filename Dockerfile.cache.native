@@ -7,4 +7,5 @@ FROM bellsoft/alpaquita-linux-base:stream-glibc-240821
 WORKDIR /home/myapp
 COPY --from=builder /home/build/target/mytool-backend .
 EXPOSE 8080
-CMD ["/bin/sh", "-c", "/home/myapp/mytool-backend"]
+ENV JVM_ARGS="-Xmx256m -XX:+PrintGC -XX:+VerboseGC"
+CMD ["/bin/sh", "-c", "/home/myapp/mytool-backend $JVM_ARGS"]
